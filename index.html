@@ -193,6 +193,8 @@
           <button class="btn btn-secondary" type="button" onclick="ntOpenSingle()">＋ Single File Create</button>
           <button class="btn btn-secondary" type="button" onclick="ntBackupZip()">🗜️ Backup ZIP</button>
           <button class="btn btn-secondary" type="button" onclick="ntBackupJson()">💾 Backup JSON</button>
+          <button class="btn btn-secondary" type="button" onclick="document.getElementById('ntImportJson').click()">📥 Import JSON</button>
+          <input id="ntImportJson" type="file" accept=".json,application/json" style="display:none" onchange="v72ImportTenantJson(this)">
           <button class="btn btn-secondary" type="button" onclick="document.getElementById('ntRestoreZip').click()">♻️ Restore ZIP</button>
           <input id="ntRestoreZip" type="file" accept=".zip,application/zip" style="display:none" onchange="ntRestoreZipFile(this)">
         </div>
@@ -5150,5 +5152,43 @@ window.v72ImportPreview=function(csv,arr,endWarns){
  const eb=document.getElementById('ntEditBody');
  if(eb)new MutationObserver(dec).observe(eb,{childList:true,subtree:true});
 })();
+</script>
+<script id="v72tjson">
+window.v72ImportTenantJson=async function(input){
+ const file=input.files&&input.files[0];if(!file)return;
+ try{
+  let j;try{j=JSON.parse(await file.text());}catch(e){throw new Error('This is not a valid JSON file.');}
+  const inc=Array.isArray(j)?j:(Array.isArray(j.files)?j.files:null);
+  if(!inc)throw new Error('No tenant files found in this JSON. Use a file made by Backup JSON.');
+  const good=inc.filter(x=>x&&typeof x==='object'&&norm(x.fileName||x.billNo));
+  if(!good.length)throw new Error('No valid tenant files (fileName missing) in this JSON.');
+  const cur=await __tenantGetAll(),have=new Map(cur.map(x=>[norm(x.fileName),x]));
+  const nNew=good.filter(x=>!have.has(norm(x.fileName||x.billNo))).length;
+  const nP=good.reduce((t,x)=>t+(Array.isArray(x.persons)?x.persons.length:0),0);
+  const h='<b>Import JSON</b><p style="margin:8px 0">'+esc(file.name)+'<br>'+good.length+' file(s), '+nP+' person(s). '+nNew+' new, '+(good.length-nNew)+' already exist.</p>'
+   +'<p style="font-size:12px;color:#94a3b8"><b>Merge</b> adds new files and new persons and keeps your current details. <b>Replace</b> makes the app match this file exactly and removes anything not in it.</p>'
+   +'<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(\'merge\')">Merge</button><button style="background:#dc2626;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(\'replace\')">Replace all</button><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(null)">Cancel</button></div>';
+  const mode=await v72dlg(h);
+  if(!mode){toast('Import cancelled - nothing changed');return;}
+  if(mode==='replace'&&!(await appConfirm('Replace ALL tenant files with this backup? Download a backup first if unsure.')))return;
+  let out;
+  if(mode==='replace')out=good;
+  else{
+   const m=new Map(have);
+   good.forEach(x=>{const k=norm(x.fileName||x.billNo),ex=m.get(k);
+    if(!ex){m.set(k,x);return;}
+    const ps=Array.isArray(ex.persons)?ex.persons.map(q=>({...q})):[];
+    (Array.isArray(x.persons)?x.persons:[]).forEach(q=>{const f=ps.find(z=>norm(z.name)===norm(q.name));
+     if(!f)ps.push(q);else['age','father','mobile','company','idNumber','address','idFront','idBack','personPhoto'].forEach(k2=>{if(!String(f[k2]||'').trim()&&String(q[k2]||'').trim())f[k2]=q[k2];});});
+    m.set(k,{...ex,persons:ps});});
+   out=[...m.values()];
+  }
+  await __tenantReplaceAll(out);
+  try{groups=await getAll('groups');await ensureBillStoresFromTenantFiles();await loadAddition();if(typeof loadPreparing==='function')await loadPreparing();if(typeof loadManage==='function')await loadManage();}catch(e){console.warn(e);}
+  try{await window.__ntReload();}catch(e){console.warn(e);}
+  toast('Imported '+good.length+' file(s) ('+mode+') \u2713');
+ }catch(e){console.error(e);alert('Import failed: '+(e.message||e));}
+ finally{input.value='';}
+};
 </script>
 </body></html>
