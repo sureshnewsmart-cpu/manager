@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><title>Rent Manager V7.2</title><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script>if(typeof XLSX==='undefined'){window.XLSX=new Proxy({},{get(){try{toast('Excel library not loaded. Connect to the internet once so it can be cached, then retry.')}catch(e){}throw new Error('XLSX library unavailable (offline)');}});}</script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#0f172a;color:#e2e8f0}.app-bar{position:sticky;top:0;z-index:40;background:#0f172a;border-bottom:1px solid rgba(255,255,255,0.1);padding:10px 14px;display:flex;justify-content:space-between;align-items:center}.hamburger{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer}.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;opacity:0;pointer-events:none;transition:0.3s}.drawer-overlay.open{opacity:1;pointer-events:auto}.drawer{position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:#1e293b;z-index:60;transform:translateX(-100%);transition:0.3s;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-header{padding:18px;border-bottom:1px solid rgba(255,255,255,0.06)}.drawer-menu{flex:1;overflow-y:auto;padding:8px}.menu-item{padding:10px 12px;border-radius:12px;display:flex;align-items:center;gap:8px;margin-bottom:3px;cursor:pointer;border:1px solid transparent;font-size:12px}.menu-item.active{background:rgba(20,184,166,0.12);border-color:rgba(20,184,166,0.3);color:#14b8a6}.menu-item:not(.active){color:#cbd5e1}.content{padding:10px;padding-bottom:90px;max-width:850px;margin:0 auto}.card{background:rgba(30,41,59,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:12px;margin-bottom:10px}.label{font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px}.input{width:100%;background:#0f172a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 11px;color:#fff;font-size:12px;outline:none}.input:focus{border-color:#14b8a6}.upload-zone{border:2px dashed rgba(20,184,166,0.4);border-radius:18px;padding:16px;text-align:center;background:rgba(20,184,166,0.06);cursor:pointer;font-size:12px}.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid rgba(255,255,255,0.08);margin-top:8px}table{width:100%;border-collapse:collapse;min-width:650px}th{font-size:12px;color:#94a3b8;padding:8px 6px;background:#0f172a;text-align:left;white-space:nowrap}td{padding:8px 6px;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);white-space:nowrap}tfoot td{background:rgba(20,184,166,0.12);font-weight:800}.btn{padding:8px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer}.btn-primary{background:#14b8a6;color:#0f172a}.btn-secondary{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1)}.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;border-radius:24px;font-size:12px;opacity:0;transition:0.3s;z-index:100;max-width:90vw;text-align:center}.toast.show{opacity:1}.empty{padding:18px;text-align:center;color:#64748b;font-size:12px}.badge-ok{background:rgba(20,184,166,0.15);color:#14b8a6;padding:2px 6px;border-radius:8px;font-size:12px;border:1px solid rgba(20,184,166,0.25)}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:70;display:none;align-items:flex-end}.modal-overlay.open{display:flex}.modal{background:#1e293b;border-radius:20px 20px 0 0;padding:14px;width:100%;max-height:85vh;overflow-y:auto}.quick-input{width:80px;background:#0f172a;border:1px solid rgba(20,184,166,0.5);border-radius:6px;padding:6px;color:#fff;font-size:12px;text-align:center}.dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.dash-card{background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px}.dash-card .big{font-size:16px;font-weight:800;color:#14b8a6;margin-top:3px}.folder-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}.folder{padding:8px 12px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(30,41,59,0.6);font-size:12px;font-weight:700;min-width:70px}.folder.active{background:rgba(20,184,166,0.15);border-color:#14b8a6;color:#14b8a6}</style><style id="ntModalFix">#ntFileModal{z-index:70}#ntEditModal{z-index:90}#ntBulkModal,#ntSingleModal{z-index:90}#tfwOverlay{z-index:95}#agrOverlay{z-index:96;align-items:flex-end}@media(min-width:700px){#agrOverlay{align-items:center}}.toast{pointer-events:none}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" media="print" onload="this.media='all'"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b1220"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><title>Rent Manager V7.2</title><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script>if(typeof XLSX==='undefined'){window.XLSX=new Proxy({},{get(){try{toast('Excel library not loaded. Connect to the internet once so it can be cached, then retry.')}catch(e){console.warn(e)}throw new Error('XLSX library unavailable (offline)');}});}</script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#0f172a;color:#e2e8f0}.app-bar{position:sticky;top:0;z-index:40;background:#0f172a;border-bottom:1px solid rgba(255,255,255,0.1);padding:10px 14px;display:flex;justify-content:space-between;align-items:center}.hamburger{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer}.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;opacity:0;pointer-events:none;transition:0.3s}.drawer-overlay.open{opacity:1;pointer-events:auto}.drawer{position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:#1e293b;z-index:60;transform:translateX(-100%);transition:0.3s;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-header{padding:18px;border-bottom:1px solid rgba(255,255,255,0.06)}.drawer-menu{flex:1;overflow-y:auto;padding:8px}.menu-item{padding:10px 12px;border-radius:12px;display:flex;align-items:center;gap:8px;margin-bottom:3px;cursor:pointer;border:1px solid transparent;font-size:12px}.menu-item.active{background:rgba(20,184,166,0.12);border-color:rgba(20,184,166,0.3);color:#14b8a6}.menu-item:not(.active){color:#cbd5e1}.content{padding:10px;padding-bottom:90px;max-width:850px;margin:0 auto}.card{background:rgba(30,41,59,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:12px;margin-bottom:10px}.label{font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px}.input{width:100%;background:#0f172a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 11px;color:#fff;font-size:12px;outline:none}.input:focus{border-color:#14b8a6}.upload-zone{border:2px dashed rgba(20,184,166,0.4);border-radius:18px;padding:16px;text-align:center;background:rgba(20,184,166,0.06);cursor:pointer;font-size:12px}.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid rgba(255,255,255,0.08);margin-top:8px}table{width:100%;border-collapse:collapse;min-width:650px}th{font-size:12px;color:#94a3b8;padding:8px 6px;background:#0f172a;text-align:left;white-space:nowrap}td{padding:8px 6px;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);white-space:nowrap}tfoot td{background:rgba(20,184,166,0.12);font-weight:800}.btn{padding:8px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer}.btn-primary{background:#14b8a6;color:#0f172a}.btn-secondary{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1)}.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;border-radius:24px;font-size:12px;opacity:0;transition:0.3s;z-index:100;max-width:90vw;text-align:center}.toast.show{opacity:1}.empty{padding:18px;text-align:center;color:#64748b;font-size:12px}.badge-ok{background:rgba(20,184,166,0.15);color:#14b8a6;padding:2px 6px;border-radius:8px;font-size:12px;border:1px solid rgba(20,184,166,0.25)}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:70;display:none;align-items:flex-end}.modal-overlay.open{display:flex}.modal{background:#1e293b;border-radius:20px 20px 0 0;padding:14px;width:100%;max-height:85vh;overflow-y:auto}.quick-input{width:80px;background:#0f172a;border:1px solid rgba(20,184,166,0.5);border-radius:6px;padding:6px;color:#fff;font-size:12px;text-align:center}.dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.dash-card{background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px}.dash-card .big{font-size:16px;font-weight:800;color:#14b8a6;margin-top:3px}.folder-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}.folder{padding:8px 12px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(30,41,59,0.6);font-size:12px;font-weight:700;min-width:70px}.folder.active{background:rgba(20,184,166,0.15);border-color:#14b8a6;color:#14b8a6}</style><style id="ntModalFix">#ntFileModal{z-index:70}#ntEditModal{z-index:90}#ntBulkModal,#ntSingleModal{z-index:90}#tfwOverlay{z-index:95}#agrOverlay{z-index:96;align-items:flex-end}@media(min-width:700px){#agrOverlay{align-items:center}}.toast{pointer-events:none}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" media="print" onload="this.media='all'"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b1220"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
 <div class="app-bar"><div style="display:flex;gap:8px;align-items:center"><div class="hamburger" id="ham">☰</div><div><div style="font-weight:800;font-size:13px">RENT MANAGER <span style="color:#14b8a6">V7 FINAL</span></div><div style="font-size:12px;color:#94a3b8" id="screenTitle">BILL PREPARING</div></div></div><div style="display:flex;gap:6px;align-items:center">
 <div style="font-size:12px;padding:3px 7px;border-radius:20px;background:rgba(20,184,166,0.15);color:#14b8a6;border:1px solid rgba(20,184,166,0.3)">V7 ✓ ALL FIXES</div>
 <button onclick="downloadFullApp()" style="font-size:12px;padding:5px 10px;border-radius:20px;background:#14b8a6;color:#0f172a;border:none;font-weight:800;cursor:pointer">⬇️ Download</button>
@@ -3394,7 +3394,7 @@ function downloadPreparingTXT(){
   toast(rows.length+' bills TXT downloaded ✓');
 }
 
-downloadCSV=(type)=>{
+window.downloadCSV=(type)=>{
   let csv='', filename='';
   if(type==='preparing'){
     csv='BillNo,Start,End,Units,Charge,Price\n';
@@ -4623,7 +4623,7 @@ function showP(i,b){document.querySelectorAll('.pd').forEach(function(e){e.style
     tfwCollect();const p=tfwDraft.p||{};
     const person={...newPerson(),
       name:p.name||('Person '+(tfwIndex+1)),age:p.age||'',company:p.company||'',mobile:p.mobile||'',
-      idType:p.idType||'Aadhar Card',idNumber:p.idNumber||'',entryDate:p.entry||today(),exitDate:p.exit||'',
+      idType:p.idType||'Aadhar Card',idNumber:p.idNumber||'',entryDate:p.entry||(String(selectedMonth||'').length===7?selectedMonth+'-01':today()),exitDate:p.exit||'',
       idFront:tfwMedia.front,idBack:tfwMedia.back,personPhoto:tfwMedia.photo,
       attachFiles:tfwMedia.attachments.slice(),
       audios:tfwMedia.audio?[{name:'audio',type:tfwTypeOf(tfwMedia.audio),dataUrl:tfwMedia.audio}]:[]};
@@ -4974,7 +4974,7 @@ function showP(i,b){document.querySelectorAll('.pd').forEach(function(e){e.style
 <script>
 /* Install as an app (PWA): works when the file is opened from https:// (e.g. GitHub Pages), harmless otherwise */
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
-  window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('Service worker not registered (host sw.js, manifest.webmanifest and icons next to this file):',e);});});
+  window.addEventListener('load',function(){(/^https?:/.test(location.protocol)?navigator.serviceWorker.register('sw.js'):Promise.resolve()).catch(function(e){console.warn('Service worker not registered (host sw.js, manifest.webmanifest and icons next to this file):',e);});});
 }
 </script>
 
@@ -4987,22 +4987,24 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
  window.fromPaise=function(p){return p/100;};
  function dlg(html){return new Promise(res=>{let d=document.getElementById('v72Dlg');if(!d){d=document.createElement('div');d.id='v72Dlg';document.body.appendChild(d);}
   d.innerHTML='<div class="box">'+html+'</div>';d.classList.add('open');d.__done=v=>{d.classList.remove('open');res(v);};});}
- window.v72dlg=dlg;window.appConfirm=function(msg){return dlg('<p>'+esc(msg)+'</p><div style="display:flex;gap:8px;margin-top:12px"><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(true)">OK</button><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(false)">Cancel</button></div>');};
+ window.v72dlg=dlg;window.alert=function(m){try{dlg('<p>'+esc(String(m))+'</p><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(1)">OK</button>');}catch(e){console.warn(m);}};window.appConfirm=function(msg){return dlg('<p>'+esc(msg)+'</p><div style="display:flex;gap:8px;margin-top:12px"><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(true)">OK</button><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(false)">Cancel</button></div>');};
  window.appPrompt=function(msg,def){return dlg('<p>'+esc(msg)+'</p><input id="v72In" class="input" style="margin-top:8px" value="'+esc(def||'')+'"><div style="display:flex;gap:8px;margin-top:12px"><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(document.getElementById(\'v72In\').value)">OK</button><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(null)">Cancel</button></div>');};
  /* ---- 8: full JSON backup + weekly prompt ---- */
  const STORES=['preparing','addition','groups','overrides','persons','manage','dual','modlog','msgmap','tenantFiles','spending','income','electric','ebBills','tenantVacated','resetHistory'];
  window.v72Backup=async function(){
   const data={};for(const s of STORES){try{data[s]=await getAll(s,true);}catch(e){data[s]=[];}}
+  try{data.__tenantFiles=await __tenantGetAll();}catch(e){data.__tenantFiles=[];console.warn(e);}
+  try{const lo={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^v72/.test(k))lo[k]=localStorage.getItem(k);}data.__local=[lo];}catch(e){data.__local=[];}
   const blob=new Blob([JSON.stringify({app:'RentManager',version:'7.2',date:new Date().toISOString(),data})],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='rent-backup-'+todayLocal()+'.json';document.body.appendChild(a);a.click();a.remove();
-  try{localStorage.setItem('v72LastBackup',String(Date.now()));}catch(e){}
+  try{localStorage.setItem('v72LastBackup',String(Date.now()));}catch(e){console.warn(e)}
   toast('Backup downloaded \u2713');const b=document.getElementById('v72Bar');if(b)b.remove();
  };
  window.v72RestoreTest=function(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=async()=>{
   try{const j=JSON.parse(await i.files[0].text());const rows=Object.entries(j.data||{}).map(([k,v])=>k+': '+(Array.isArray(v)?v.length:'invalid')+' rows');
    dlg('<b>Backup readable \u2713</b><pre>'+esc(rows.join('\n'))+'</pre><p>Nothing was changed. This only verifies the file.</p><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(1)">Close</button>');
   }catch(e){dlg('<b>Backup unreadable</b><p>'+esc(e.message)+'</p><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(1)">Close</button>');}};i.click();};
- function weeklyPrompt(){let last=0;try{last=Number(localStorage.getItem('v72LastBackup')||0);}catch(e){}
+ function weeklyPrompt(){let last=0;try{last=Number(localStorage.getItem('v72LastBackup')||0);}catch(e){console.warn(e)}
   if(Date.now()-last<7*864e5||document.getElementById('v72Bar'))return;
   const b=document.createElement('div');b.id='v72Bar';b.innerHTML='<span style="flex:1">Weekly backup due.</span><button style="background:#14b8a6" onclick="v72Backup()">Download</button><button style="background:#334155;color:#fff" onclick="this.parentNode.remove()">Later</button>';document.body.appendChild(b);}
  setTimeout(weeklyPrompt,4000);
@@ -5016,6 +5018,11 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   ok('money format',money(1234.5)==='\u20B91,234.5');
   ok('paise round trip',fromPaise(toPaise(10.07))===10.07);
   try{const r=parsePreparingCSV('A1,100,150\nA2,200,100\n"a 3",10,20\nA4,x,5');ok('billing units',r.find(x=>norm(x.billNo)==='A1')?.units===50);ok('billing charge',r[0].charge===r[0].units*r[0].price);ok('negative units skipped',!r.some(x=>norm(x.billNo)==='A2'));ok('quoted/spaced bill id normalised',r.some(x=>x.id===mkId('A3',selectedMonth)));ok('problem rows warned',(r.warnings||[]).length>=2);}catch(e){ok('billing ('+e.message+')',false);}
+  try{const bn='ZZTEST',mo=selectedMonth;try{await put('addition',{id:mkId(bn,mo),billNo:bn,month:mo,billAmount:100});await doDualPay(bn,100,40,'cash');
+   const mg=(await getAll('manage')).find(x=>norm(x.billNo)===bn&&x.month===mo);const du=(await getAll('dual')).filter(x=>norm(x.billNo)===bn);
+   ok('payment: received 40',!!mg&&Number(mg.received)===40);ok('payment: history row saved',du.length>=1);ok('payment: balance 60',!!mg&&Math.max(0,100-Number(mg.received))===60);}
+  catch(e){ok('payment ('+e.message+')',false);}
+  finally{for(const st of['addition','manage','dual','modlog']){try{for(const r of await getAll(st,true))if(norm(r.billNo)===bn)await del(st,r.id);}catch(e){}}}}catch(e){}
   try{const id='__selftest_'+Date.now();await put('modlog',{id,type:'selftest'});const r=(await getAll('modlog')).some(x=>x.id===id);await del('modlog',id);ok('db put/get/del',r&&!(await getAll('modlog')).some(x=>x.id===id));}catch(e){ok('db put/get/del ('+e.message+')',false);}
   dlg('<b>Self-test</b><pre>'+esc(t.join('\n'))+'</pre><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(1)">Close</button>');
  };
@@ -5025,7 +5032,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
  addTools();setTimeout(addTools,1500);
 })();
 </script>
-<script id="v72round">(function(){const o=Number.prototype.toFixed;Number.prototype.toFixed=function(d){d=d||0;const n=Number(this);if(!isFinite(n))return o.call(n,d);const m=Math.pow(10,d);const r=Math.sign(n)*Math.round(Math.abs(n)*m*(1+Number.EPSILON))/m;return o.call(r,d);};})();</script>
+<script id="v72round">(function(){const o=Number.prototype.toFixed;Number.prototype.toFixed=function(d){d=Math.max(0,Math.min(20,d|0));const n=Number(this);if(!isFinite(n)||Math.abs(n)>=1e15)return o.call(n,d);const neg=n<0,a=Math.abs(n);const r=Number(Math.round(Number(a+'e'+d))+'e-'+d);return o.call(neg&&r!==0?-r:r,d);};})();</script>
 <script id="v72import">
 window.v72ImportPreview=function(csv,arr,endWarns){
  const ok=new Set(arr.map(p=>norm(p.billNo)));
@@ -5041,7 +5048,7 @@ window.v72ImportPreview=function(csv,arr,endWarns){
 (function(){
  const KEY='v72Favs';
  const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){return[];}};
- const save=a=>{try{localStorage.setItem(KEY,JSON.stringify(a));}catch(e){}};
+ const save=a=>{try{localStorage.setItem(KEY,JSON.stringify(a));}catch(e){console.warn(e)}};
  const nameOf=el=>{const d=el.querySelectorAll(':scope > div');return d.length>1?d[1].textContent.trim():el.textContent.trim();};
  /* ---- Favourites ---- */
  function decorate(){
@@ -5067,7 +5074,7 @@ window.v72ImportPreview=function(csv,arr,endWarns){
  /* ---- Voice ---- */
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  function listen(btn,cb){
-  if(!SR){toast('Voice input is not supported in this browser');return;}
+  if(!SR){toast('Voice is not supported in this browser or app. Use Chrome or Edge, or type instead.');return;}
   const r=new SR();r.lang='en-IN';r.interimResults=false;r.maxAlternatives=1;
   btn.classList.add('rec');
   r.onresult=e=>cb(String(e.results[0][0].transcript||''));
@@ -5086,7 +5093,7 @@ window.v72ImportPreview=function(csv,arr,endWarns){
    if(getComputedStyle(par).display==='flex')inp.after(b);else{const w=document.createElement('div');w.style.cssText='display:flex;align-items:center';inp.replaceWith(w);w.appendChild(inp);w.appendChild(b);}
   });
  }
- addMics();setTimeout(addMics,1200);setInterval(addMics,4000);
+ addMics();setTimeout(addMics,1200);new MutationObserver(()=>{clearTimeout(window.__v72mt);window.__v72mt=setTimeout(addMics,300);}).observe(document.body,{childList:true,subtree:true});
  /* ---- Ask a question ---- */
  const num=v=>Number(v||0);
  const sum=a=>a.reduce((t,x)=>t+num(x.amount),0);
@@ -5112,7 +5119,7 @@ window.v72ImportPreview=function(csv,arr,endWarns){
   const q=inp.value.trim();if(!q)return;out.textContent='Thinking...';
   let a;try{a=await answer(q);}catch(e){a='Sorry, I could not read the data: '+e.message;}
   out.textContent=a;
-  try{if(document.getElementById('v72Speak').checked&&window.speechSynthesis){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(a.replace(/\u20B9/g,'rupees '));u.lang='en-IN';speechSynthesis.speak(u);}}catch(e){}
+  try{if(document.getElementById('v72Speak').checked&&window.speechSynthesis){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(a.replace(/\u20B9/g,'rupees '));u.lang='en-IN';speechSynthesis.speak(u);}}catch(e){console.warn(e)}
  };
  window.v72Ask=function(){
   v72dlg('<b>Ask a question</b><div style="display:flex;margin-top:8px"><input id="v72Q" class="input" placeholder="e.g. bill of A1" autocomplete="off"><button type="button" id="v72QM" class="v72mic">\uD83C\uDFA4</button></div><label style="display:flex;gap:6px;align-items:center;margin-top:8px"><input type="checkbox" id="v72Speak" checked> Speak the answer</label><div id="v72Ans">Ask about a bill, units, income, spending or profit.</div><div style="display:flex;gap:8px;margin-top:12px"><button style="background:#14b8a6" onclick="v72AskRun()">Ask</button><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(1)">Close</button></div>');
@@ -5229,7 +5236,7 @@ window.v72ImportTenantJson=async function(input){
   v72dlg('<b>\uD83D\uDCB8 Voice payment</b><div style="font-size:12px;color:#94a3b8;margin:4px 0">Say or type: "N1 paid 5000 cash" or "S3 2500 GPay". You confirm before anything is saved.</div><div style="display:flex"><input id="v72VpIn" class="input" placeholder="N1 paid 5000 cash" autocomplete="off"><button type="button" id="v72VpMic" class="v72mic">\uD83C\uDFA4</button></div><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#14b8a6" onclick="v72VpFind()">Check</button><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(1)">Close</button></div><div id="v72VpOut" style="margin-top:10px;padding:10px;border-radius:10px;background:#0f172a;min-height:40px"></div>');
   setTimeout(()=>{const i=document.getElementById('v72VpIn'),m=document.getElementById('v72VpMic');if(!i)return;
    i.addEventListener('keydown',e=>{if(e.key==='Enter')find();});
-   m.onclick=()=>{if(!SR){toast('Voice input is not supported in this browser');return;}
+   m.onclick=()=>{if(!SR){toast('Voice is not supported in this browser or app. Use Chrome or Edge, or type instead.');return;}
     const r=new SR();r.lang='en-IN';r.interimResults=false;m.classList.add('rec');
     r.onresult=e=>{i.value=String(e.results[0][0].transcript||'');find();};
     r.onerror=e=>toast('Voice error: '+(e.error||'unknown'));r.onend=()=>m.classList.remove('rec');
@@ -5255,13 +5262,13 @@ window.v72ImportTenantJson=async function(input){
  const spellBill=b=>String(b).replace(/([A-Z]+)(\d+)/,(m,a,c)=>a.split('').join(' ')+' '+c);
  function say(txt){return new Promise(res=>{try{if(!window.speechSynthesis){res();return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-IN';let d=0;const f=()=>{if(!d){d=1;res();}};u.onend=f;u.onerror=f;setTimeout(f,20000);speechSynthesis.speak(u);}catch(e){res();}});}
  function listen(){return new Promise(res=>{
-  if(!SR){toast('Voice input is not supported in this browser');res(null);return;}
+  if(!SR){toast('Voice is not supported in this browser or app. Use Chrome or Edge, or type instead.');res(null);return;}
   const r=new SR(),m=$('v72VpMic');r.lang='en-IN';r.interimResults=false;if(m)m.classList.add('rec');let got=null;
   r.onresult=e=>{got=String(e.results[0][0].transcript||'');};
   r.onerror=()=>{};r.onend=()=>{if(m)m.classList.remove('rec');res(got);};
   try{r.start();}catch(e){res(null);}});}
  async function parseBill(text){
-  let gs=[];try{gs=(await getAll('groups')).map(g=>String(g.name||'').toUpperCase());}catch(e){}
+  let gs=[];try{gs=(await getAll('groups')).map(g=>String(g.name||'').toUpperCase());}catch(e){console.warn(e)}
   gs=[...new Set(gs.concat(DEF).filter(Boolean))].sort((a,b)=>b.length-a.length);
   const t=W2N(String(text||'').toLowerCase().replace(/[^a-z0-9\s-]/g,' '));
   for(const g of gs){const re=new RegExp('(?:^|\\b)'+g.toLowerCase().split('').join('\\s*')+'\\s*-?\\s*(\\d{1,3})\\b');
@@ -5306,7 +5313,7 @@ window.v72ImportTenantJson=async function(input){
   const rec=Number(man&&man.received!=null?man.received:hist.reduce((t,d)=>t+Number(d.paidAmount||0),0));
   const total=Number(add.billAmount||0),bal=Math.max(0,total-rec);
   const rows=hist.length?hist.map(d=>'<div>'+esc(d.date||'')+' \u2022 '+(d.mode==='gpay'?'GPay':'Cash')+' \u2022 '+money(d.paidAmount)+'</div>').join(''):'<div style="color:#94a3b8">No payments yet this month.</div>';
-  const html='<div><b>'+esc(add.billNo)+'</b> \u2022 '+esc(selectedMonth)+'</div><div>Total <b>'+money(total)+'</b> \u2022 Received <b>'+money(rec)+'</b></div><div>Cash '+money(cash)+' \u2022 GPay '+money(gp)+'</div><div>Balance <b style="color:'+(bal>0?'#f87171':'#22c55e')+'">'+money(bal)+'</b></div><div style="margin-top:6px;font-size:12px">'+rows+'</div>';
+  const html='<div style="font-size:12px;color:#94a3b8">Heard: \u201C'+esc(text)+'\u201D</div><div><b>'+esc(add.billNo)+'</b> \u2022 '+esc(selectedMonth)+(selectedMonth!==todayLocal().slice(0,7)?' <span style="color:#f59e0b">\u26A0 not the current month</span>':'')+'</div><div>Total <b>'+money(total)+'</b> \u2022 Received <b>'+money(rec)+'</b></div><div>Cash '+money(cash)+' \u2022 GPay '+money(gp)+'</div><div>Balance <b style="color:'+(bal>0?'#f87171':'#22c55e')+'">'+money(bal)+'</b></div><div style="margin-top:6px;font-size:12px">'+rows+'</div>';
   window.__v72bill={add,bal,rec,html};
   if(bal<=0){show(html+'<div style="margin-top:8px;color:#22c55e">Nothing is due.</div>');await say('Bill '+spellBill(add.billNo)+'. Total '+rs(total)+' rupees. Received '+rs(rec)+'. Nothing is due.');return;}
   show(html+'<input id="v72VpAmt" class="input" type="number" inputmode="decimal" placeholder="How much? (blank = full balance)" style="margin-top:10px"><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#14b8a6" onclick="v72VpChoose(\'cash\',document.getElementById(\'v72VpAmt\').value)">Pay Cash</button><button style="background:#2563eb;color:#fff" onclick="v72VpChoose(\'gpay\',document.getElementById(\'v72VpAmt\').value)">Pay GPay</button></div>');
@@ -5335,9 +5342,14 @@ window.v72ImportTenantJson=async function(input){
   setTimeout(()=>{const i=$('v72VpIn');if(!i)return;
    $('v72VpGo').onclick=()=>start(i.value);
    i.addEventListener('keydown',e=>{if(e.key==='Enter')start(i.value);});
-   $('v72VpX').onclick=()=>{sid++;pend=null;try{speechSynthesis.cancel();}catch(e){}$('v72Dlg').__done(1);};
-   $('v72VpMic').onclick=async()=>{try{speechSynthesis.cancel();}catch(e){}const t=await listen();if(t){i.value=t;start(t);}};},0);
+   $('v72VpX').onclick=()=>{sid++;pend=null;try{speechSynthesis.cancel();}catch(e){console.warn(e)}$('v72Dlg').__done(1);};
+   $('v72VpMic').onclick=async()=>{try{speechSynthesis.cancel();}catch(e){console.warn(e)}const t=await listen();if(t){i.value=t;start(t);}};},0);
  };
 })();
 </script>
+<script id="v72media">(function(){const o=FileReader.prototype.readAsDataURL;
+ async function shrink(b){const bm=await createImageBitmap(b);const M=1280,k=Math.min(1,M/Math.max(bm.width,bm.height));const c=document.createElement('canvas');c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);c.getContext('2d').drawImage(bm,0,0,c.width,c.height);return await new Promise(r=>c.toBlob(x=>r(x&&x.size<b.size?x:b),'image/jpeg',0.72));}
+ FileReader.prototype.readAsDataURL=function(b){const me=this;
+  if(b&&b.size>8*1024*1024){try{toast('Large file (over 8 MB). It may slow the app.');}catch(e){}}
+  if(b&&/^image\/(jpeg|png|webp)/.test(b.type)&&b.size>250000&&window.createImageBitmap){shrink(b).then(x=>o.call(me,x),()=>o.call(me,b));}else o.call(me,b);};})();</script>
 </body></html>
