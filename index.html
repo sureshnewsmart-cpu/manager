@@ -5122,4 +5122,33 @@ window.v72ImportPreview=function(csv,arr,endWarns){
  const tools=document.getElementById('v72Tools');if(tools){const d=document.createElement('div');d.className='menu-item';d.textContent='\uD83C\uDFA4 Ask a question';d.onclick=()=>{closeDrawer();v72Ask();};tools.appendChild(d);}
 })();
 </script>
+<script id="v72persondd">
+(function(){
+ const open=new Map();let lastCount=0,lastFile='';
+ function dec(){
+  const box=document.getElementById('ntPersonsEdit');if(!box)return;
+  const cards=[...box.children].filter(c=>c.classList.contains('card'));
+  const lb=document.querySelector('#ntEditBody .label');const fk=lb?lb.textContent:'';
+  if(fk!==lastFile){open.clear();lastFile=fk;lastCount=cards.length;}
+  cards.forEach((c,i)=>{
+   if(c.dataset.v72)return;c.dataset.v72='1';
+   const head=c.firstElementChild,b=head&&head.querySelector('b');if(!b)return;
+   const body=document.createElement('div');
+   [...c.children].slice(1).forEach(x=>body.appendChild(x));c.appendChild(body);
+   if(cards.length>lastCount&&i>=lastCount)open.set(i,true);
+   if(cards.length===1&&open.get(0)===undefined)open.set(0,true);
+   const upd=()=>{const nm=c.querySelector('[data-k="name"]');b.textContent=(open.get(i)?'\u25BE ':'\u25B8 ')+'Person '+(i+1)+(nm&&nm.value?' \u2013 '+nm.value:'');};
+   const set=o=>{open.set(i,o);body.style.display=o?'':'none';upd();};
+   b.style.cursor=head.style.cursor='pointer';
+   b.onclick=ev=>{ev.stopPropagation();set(!open.get(i));};
+   head.onclick=ev=>{if(ev.target.tagName!=='BUTTON')set(!open.get(i));};
+   body.style.display=open.get(i)?'':'none';upd();c._upd=upd;
+  });
+  lastCount=cards.length;
+ }
+ document.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.k==='name'){const c=t.closest('.card');if(c&&c._upd)c._upd();}});
+ const eb=document.getElementById('ntEditBody');
+ if(eb)new MutationObserver(dec).observe(eb,{childList:true,subtree:true});
+})();
+</script>
 </body></html>
