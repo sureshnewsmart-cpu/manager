@@ -189,6 +189,7 @@
         <div class="label" style="margin:0">Tenant Files</div>
         <div style="display:flex;gap:5px;flex-wrap:wrap">
           <button class="btn btn-primary" type="button" onclick="ntOpenBulk()">📁 Bulk File Creation</button>
+          <button class="btn btn-secondary" type="button" onclick="ntOpenBulk()">👥 Bulk Person CSV (sync)</button>
           <button class="btn btn-secondary" type="button" onclick="ntOpenSingle()">＋ Single File Create</button>
           <button class="btn btn-secondary" type="button" onclick="ntBackupZip()">🗜️ Backup ZIP</button>
           <button class="btn btn-secondary" type="button" onclick="ntBackupJson()">💾 Backup JSON</button>
@@ -4884,7 +4885,7 @@ function showP(i,b){document.querySelectorAll('.pd').forEach(function(e){e.style
     try{
       const rows=csvParse(await file.text());
       if(rows.length<2){alert('CSV is empty. Download the template and fill it.');return;}
-      const head=rows[0].map(h=>String(h).trim().toLowerCase().replace(/[^a-z0-9]/g,''));
+      const head=rows[0].map(h=>String(h).trim().toLowerCase().replace(/[^a-z0-9]/g,'')).map(h=>({filenumber:'fileno',filename:'fileno',person:'personname',name:'personname',father:'fathername',mobilenumber:'mobile',phone:'mobile',idno:'idnumber',aadhaar:'idnumber',aadhar:'idnumber'}[h]||h));
       const col={};BULK_COLS.forEach(c=>{col[c]=head.indexOf(c.toLowerCase());});
       if(col.FileNo<0){alert('FileNo column not found. Please use the template.');return;}
       const get=(r,c)=>col[c]>=0?String(r[col[c]]??'').trim():'';
@@ -4904,7 +4905,7 @@ function showP(i,b){document.querySelectorAll('.pd').forEach(function(e){e.style
         const count=Math.floor(Number(g.billCount)||0);
         if(roll<1||roll>count){problems.push(`${fileName}: above bill count ${count} of group ${group} - increase the count in Rent Update first`);continue;}
         const ex=map.get(fileName);
-        if(ex&&Array.isArray(ex.persons)&&ex.persons.length){problems.push(`${fileName}: already has persons - skipped`);continue;}
+        
         const ps=[];
         list.forEach(({r,line})=>{
           const name=get(r,'PersonName');
@@ -4915,6 +4916,7 @@ function showP(i,b){document.querySelectorAll('.pd').forEach(function(e){e.style
             idType:get(r,'IDType')||'Aadhar Card',idNumber:get(r,'IDNumber'),address:get(r,'Address'),entryDate:entry,exitDate:csvDate(get(r,'ExitDate')),
             history:[{id:genId(),type:'added',date:entry,message:`${name} added by Bulk CSV`}]});
         });
+        if(ex&&Array.isArray(ex.persons)&&ex.persons.length){const cur=ex.persons.map(q=>({...q}));ps.forEach(q=>{const m=cur.find(z=>n(z.name)===n(q.name));if(m){['age','father','mobile','company','idNumber','address'].forEach(k=>{if(!String(m[k]||'').trim()&&String(q[k]||'').trim())m[k]=q[k];});if(!m.exitDate&&q.exitDate)m.exitDate=q.exitDate;}else cur.push(q);});ps.length=0;ps.push(...cur);}
         let adv=0,advDate=today();
         list.forEach(({r})=>{const a=Number(get(r,'InitialAdvance'));if(a>0&&!adv){adv=a;advDate=csvDate(get(r,'AdvanceDate'))||today();}});
         const base=ex||{id:genId(),fileName,group,roll,createdAt:stamp,createdDate:new Date(stamp).toLocaleString()};
