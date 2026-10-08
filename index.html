@@ -5281,7 +5281,7 @@ window.v72ImportTenantJson=async function(input){
   await say('Payment recorded. New balance '+rs(nb)+' rupees.');
  }
  window.v72VpCommit=()=>commit(sid);
- window.v72VpChoose=(mode,amt)=>choose(sid,mode,amt);
+ window.v72VpChoose=(mode,v)=>choose(sid,mode,parseFloat(v)||0);
  async function choose(id,mode,amtSaid){
   if(id!==sid||!window.__v72bill)return;const b=window.__v72bill;
   const amt=amtSaid>0?amtSaid:b.bal;
@@ -5308,20 +5308,29 @@ window.v72ImportTenantJson=async function(input){
   const html='<div><b>'+esc(add.billNo)+'</b> \u2022 '+esc(selectedMonth)+'</div><div>Total <b>'+money(total)+'</b> \u2022 Received <b>'+money(rec)+'</b></div><div>Cash '+money(cash)+' \u2022 GPay '+money(gp)+'</div><div>Balance <b style="color:'+(bal>0?'#f87171':'#22c55e')+'">'+money(bal)+'</b></div><div style="margin-top:6px;font-size:12px">'+rows+'</div>';
   window.__v72bill={add,bal,rec,html};
   if(bal<=0){show(html+'<div style="margin-top:8px;color:#22c55e">Nothing is due.</div>');await say('Bill '+spellBill(add.billNo)+'. Total '+rs(total)+' rupees. Received '+rs(rec)+'. Nothing is due.');return;}
-  show(html+'<div style="display:flex;gap:8px;margin-top:10px"><button style="background:#14b8a6" onclick="v72VpChoose(\'cash\')">Pay balance Cash</button><button style="background:#2563eb;color:#fff" onclick="v72VpChoose(\'gpay\')">Pay balance GPay</button></div>');
-  await say('Bill '+spellBill(add.billNo)+'. Total amount '+rs(total)+' rupees. Received '+rs(rec)+'. Cash '+rs(cash)+', G Pay '+rs(gp)+'. Balance '+rs(bal)+' rupees. Pay the balance by cash or G Pay?');
-  for(let tries=0;tries<2;tries++){
+  show(html+'<input id="v72VpAmt" class="input" type="number" inputmode="decimal" placeholder="How much? (blank = full balance)" style="margin-top:10px"><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#14b8a6" onclick="v72VpChoose(\'cash\',document.getElementById(\'v72VpAmt\').value)">Pay Cash</button><button style="background:#2563eb;color:#fff" onclick="v72VpChoose(\'gpay\',document.getElementById(\'v72VpAmt\').value)">Pay GPay</button></div>');
+  await say('Bill '+spellBill(add.billNo)+'. Total amount '+rs(total)+' rupees. Received '+rs(rec)+'. Cash '+rs(cash)+', G Pay '+rs(gp)+'. Balance '+rs(bal)+' rupees. How much will you pay? Say an amount, or say full balance.');
+  let amt=0,md='';
+  for(let tries=0;tries<2&&!amt;tries++){
    if(id!==sid||pend)return;
    const a=await listen();if(id!==sid||pend)return;
    if(a&&no(a)){show(html+'<div style="margin-top:8px">Cancelled.</div>');return;}
-   const md=a?modeIn(a):'';
-   if(md){await choose(id,md,amountIn(a));return;}
-   if(tries===0)await say('Please say cash or G Pay.');
+   if(a){const n=amountIn(a);amt=n>0?n:(/\b(full|balance|all|whole|complete|total)\b/i.test(a)?bal:0);md=modeIn(a);}
+   if(!amt&&tries===0)await say('Please say the amount, or say full balance.');
   }
+  if(!amt)return;
+  for(let tries=0;tries<2&&!md;tries++){
+   await say('You will pay '+rs(amt)+' rupees. Cash or G Pay?');
+   if(id!==sid||pend)return;
+   const a=await listen();if(id!==sid||pend)return;
+   if(a&&no(a)){show(html+'<div style="margin-top:8px">Cancelled.</div>');return;}
+   md=a?modeIn(a):'';
+  }
+  if(md)await choose(id,md,amt);
  }
  window.v72VoicePay=function(){
   sid++;pend=null;window.__v72bill=null;
-  v72dlg('<b>\uD83D\uDCB8 Voice payment</b><div style="font-size:12px;color:#94a3b8;margin:4px 0">Tap \uD83C\uDFA4 and say the bill number, e.g. "N L 20" or "P S K 1". The app reads the total, received, cash/GPay history and balance, then asks how to pay the balance. You confirm before it saves.</div><div style="display:flex"><input id="v72VpIn" class="input" placeholder="Bill no. e.g. NL20" autocomplete="off"><button type="button" id="v72VpMic" class="v72mic">\uD83C\uDFA4</button></div><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#14b8a6" id="v72VpGo">Check bill</button><button style="background:#334155;color:#fff" id="v72VpX">Close</button></div><div id="v72VpOut" style="margin-top:10px;padding:10px;border-radius:10px;background:#0f172a;min-height:40px"></div>');
+  v72dlg('<b>\uD83D\uDCB8 Voice payment</b><div style="font-size:12px;color:#94a3b8;margin:4px 0">Tap \uD83C\uDFA4 and say the bill number, e.g. "N L 20" or "P S K 1". The app reads the total, received, cash/GPay history and balance, then asks how much you will pay and whether by cash or GPay. You confirm before it saves.</div><div style="display:flex"><input id="v72VpIn" class="input" placeholder="Bill no. e.g. NL20" autocomplete="off"><button type="button" id="v72VpMic" class="v72mic">\uD83C\uDFA4</button></div><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#14b8a6" id="v72VpGo">Check bill</button><button style="background:#334155;color:#fff" id="v72VpX">Close</button></div><div id="v72VpOut" style="margin-top:10px;padding:10px;border-radius:10px;background:#0f172a;min-height:40px"></div>');
   setTimeout(()=>{const i=$('v72VpIn');if(!i)return;
    $('v72VpGo').onclick=()=>start(i.value);
    i.addEventListener('keydown',e=>{if(e.key==='Enter')start(i.value);});
