@@ -5277,8 +5277,8 @@ window.v72ImportTenantJson=async function(input){
   if(!pend||id!==sid)return;const x=pend;pend=null;
   try{await doDualPay(x.add.billNo,x.bal,x.amt,x.mode);}catch(e){show('Payment failed: '+esc(e.message||e));return;}
   const nb=Math.max(0,x.add.billAmount-(x.rec+x.amt));
-  show('<b style="color:#22c55e">\u2714 Recorded</b><div>'+money(x.amt)+' by '+(x.mode==='gpay'?'GPay':'Cash')+'</div><div>New balance <b>'+money(nb)+'</b></div>');
-  await say('Payment recorded. New balance '+rs(nb)+' rupees.');
+  show('<b style="color:#22c55e">\u2714 Received and ledger updated</b><div>'+money(x.amt)+' by '+(x.mode==='gpay'?'GPay':'Cash')+'</div><div>New balance <b>'+money(nb)+'</b></div>');
+  await say('Received '+rs(x.amt)+' rupees by '+(x.mode==='gpay'?'G Pay':'cash')+'. Ledger updated. Balance '+rs(nb)+' rupees.');
  }
  window.v72VpCommit=()=>commit(sid);
  window.v72VpChoose=(mode,v)=>choose(sid,mode,parseFloat(v)||0);
@@ -5286,6 +5286,7 @@ window.v72ImportTenantJson=async function(input){
   if(id!==sid||!window.__v72bill)return;const b=window.__v72bill;
   const amt=amtSaid>0?amtSaid:b.bal;
   pend={add:b.add,bal:b.bal,rec:b.rec,amt,mode};
+  if(amt<=b.bal){await commit(id);return;}
   show(b.html+'<hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:8px 0"><div>Pay <b>'+money(amt)+'</b> by <b>'+(mode==='gpay'?'GPay':'Cash')+'</b>'+(amt>b.bal?' <span style="color:#f59e0b">\u26A0 more than balance</span>':'')+'</div><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#22c55e" onclick="v72VpCommit()">Yes, record payment</button></div>');
   await say('Pay '+rs(amt)+' rupees by '+(mode==='gpay'?'G Pay':'cash')+'. Say yes to confirm.');
   if(id!==sid||!pend)return;
