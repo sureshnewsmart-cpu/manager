@@ -5240,4 +5240,94 @@ window.v72ImportTenantJson=async function(input){
  const tools=document.getElementById('v72Tools');if(tools){const d=document.createElement('div');d.className='menu-item';d.textContent='\uD83D\uDCB8 Voice payment';d.onclick=()=>{closeDrawer();v72VoicePay();};tools.appendChild(d);}
 })();
 </script>
+<script id="v72vpay2">
+(function(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ const ONES={zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19};
+ const TENS={twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90};
+ const W2N=t=>{const k=t.replace(/-/g,' ').split(/\s+/),o=[];for(let i=0;i<k.length;i++){const w=k[i];
+  if(w in TENS){let v=TENS[w];const nx=k[i+1];if(nx in ONES&&ONES[nx]>0&&ONES[nx]<10){v+=ONES[nx];i++;}o.push(v);}
+  else if(w in ONES)o.push(ONES[w]);else o.push(w);}return o.join(' ');};
+ const DEF=['NL','NR','SK','S','PS','PSK','NE','MKB','MKH'];
+ let sid=0,pend=null;
+ const $=id=>document.getElementById(id);
+ const rs=n=>Math.round(Number(n||0));
+ const spellBill=b=>String(b).replace(/([A-Z]+)(\d+)/,(m,a,c)=>a.split('').join(' ')+' '+c);
+ function say(txt){return new Promise(res=>{try{if(!window.speechSynthesis){res();return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-IN';let d=0;const f=()=>{if(!d){d=1;res();}};u.onend=f;u.onerror=f;setTimeout(f,20000);speechSynthesis.speak(u);}catch(e){res();}});}
+ function listen(){return new Promise(res=>{
+  if(!SR){toast('Voice input is not supported in this browser');res(null);return;}
+  const r=new SR(),m=$('v72VpMic');r.lang='en-IN';r.interimResults=false;if(m)m.classList.add('rec');let got=null;
+  r.onresult=e=>{got=String(e.results[0][0].transcript||'');};
+  r.onerror=()=>{};r.onend=()=>{if(m)m.classList.remove('rec');res(got);};
+  try{r.start();}catch(e){res(null);}});}
+ async function parseBill(text){
+  let gs=[];try{gs=(await getAll('groups')).map(g=>String(g.name||'').toUpperCase());}catch(e){}
+  gs=[...new Set(gs.concat(DEF).filter(Boolean))].sort((a,b)=>b.length-a.length);
+  const t=W2N(String(text||'').toLowerCase().replace(/[^a-z0-9\s-]/g,' '));
+  for(const g of gs){const re=new RegExp('(?:^|\\b)'+g.toLowerCase().split('').join('\\s*')+'\\s*-?\\s*(\\d{1,3})\\b');
+   const m=t.match(re);if(m)return cleanBill(g+m[1]);}
+  return '';
+ }
+ function amountIn(text){const t=W2N(String(text||'').toLowerCase().replace(/[,\u20B9]/g,''));const m=t.match(/(\d+(?:\.\d+)?)\s*(k|thousand|hundred|lakh|lac)?/);if(!m)return 0;let a=parseFloat(m[1]);const u=m[2];if(u==='k'||u==='thousand')a*=1000;else if(u==='hundred')a*=100;else if(u==='lakh'||u==='lac')a*=100000;return a;}
+ const modeIn=t=>/g\s*pay|google|phone\s*pe|paytm|upi|online|bank/i.test(t)?'gpay':/cash/i.test(t)?'cash':'';
+ const yes=t=>/\b(yes|yeah|yep|confirm|ok|okay|correct|sure|haan|ha)\b/i.test(t);
+ const no=t=>/\b(no|cancel|stop|wrong|nahi|nope)\b/i.test(t);
+ const show=h=>{const o=$('v72VpOut');if(o)o.innerHTML=h;};
+ async function commit(id){
+  if(!pend||id!==sid)return;const x=pend;pend=null;
+  try{await doDualPay(x.add.billNo,x.bal,x.amt,x.mode);}catch(e){show('Payment failed: '+esc(e.message||e));return;}
+  const nb=Math.max(0,x.add.billAmount-(x.rec+x.amt));
+  show('<b style="color:#22c55e">\u2714 Recorded</b><div>'+money(x.amt)+' by '+(x.mode==='gpay'?'GPay':'Cash')+'</div><div>New balance <b>'+money(nb)+'</b></div>');
+  await say('Payment recorded. New balance '+rs(nb)+' rupees.');
+ }
+ window.v72VpCommit=()=>commit(sid);
+ window.v72VpChoose=(mode,amt)=>choose(sid,mode,amt);
+ async function choose(id,mode,amtSaid){
+  if(id!==sid||!window.__v72bill)return;const b=window.__v72bill;
+  const amt=amtSaid>0?amtSaid:b.bal;
+  pend={add:b.add,bal:b.bal,rec:b.rec,amt,mode};
+  show(b.html+'<hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:8px 0"><div>Pay <b>'+money(amt)+'</b> by <b>'+(mode==='gpay'?'GPay':'Cash')+'</b>'+(amt>b.bal?' <span style="color:#f59e0b">\u26A0 more than balance</span>':'')+'</div><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#22c55e" onclick="v72VpCommit()">Yes, record payment</button></div>');
+  await say('Pay '+rs(amt)+' rupees by '+(mode==='gpay'?'G Pay':'cash')+'. Say yes to confirm.');
+  if(id!==sid||!pend)return;
+  const a=await listen();if(id!==sid||!pend)return;
+  if(a&&yes(a))commit(id);else if(a&&no(a)){pend=null;show('Cancelled. Nothing was saved.');say('Cancelled.');}
+ }
+ async function start(text){
+  const id=++sid;pend=null;window.__v72bill=null;
+  const bill=await parseBill(text);
+  if(!bill){show('I did not catch the bill number. Type it or tap the mic and say it again, like "N L 20".');say('I did not catch the bill number. Please say it again.');return;}
+  const add=(await getAll('addition')).find(b=>norm(b.billNo)===bill&&b.month===selectedMonth);
+  if(!add){show('Bill '+esc(bill)+' is not in Bill Addition for '+esc(selectedMonth)+'.');say('Bill '+spellBill(bill)+' is not available for this month.');return;}
+  const man=(await getAll('manage')).find(m=>norm(m.billNo)===bill&&m.month===selectedMonth);
+  const hist=(await getAll('dual')).filter(d=>norm(d.billNo)===bill&&d.month===selectedMonth).sort((a,b)=>String(a.date).localeCompare(String(b.date)));
+  const sumBy=m=>hist.filter(d=>d.mode===m).reduce((t,d)=>t+Number(d.paidAmount||0),0);
+  const cash=sumBy('cash'),gp=sumBy('gpay');
+  const rec=Number(man&&man.received!=null?man.received:hist.reduce((t,d)=>t+Number(d.paidAmount||0),0));
+  const total=Number(add.billAmount||0),bal=Math.max(0,total-rec);
+  const rows=hist.length?hist.map(d=>'<div>'+esc(d.date||'')+' \u2022 '+(d.mode==='gpay'?'GPay':'Cash')+' \u2022 '+money(d.paidAmount)+'</div>').join(''):'<div style="color:#94a3b8">No payments yet this month.</div>';
+  const html='<div><b>'+esc(add.billNo)+'</b> \u2022 '+esc(selectedMonth)+'</div><div>Total <b>'+money(total)+'</b> \u2022 Received <b>'+money(rec)+'</b></div><div>Cash '+money(cash)+' \u2022 GPay '+money(gp)+'</div><div>Balance <b style="color:'+(bal>0?'#f87171':'#22c55e')+'">'+money(bal)+'</b></div><div style="margin-top:6px;font-size:12px">'+rows+'</div>';
+  window.__v72bill={add,bal,rec,html};
+  if(bal<=0){show(html+'<div style="margin-top:8px;color:#22c55e">Nothing is due.</div>');await say('Bill '+spellBill(add.billNo)+'. Total '+rs(total)+' rupees. Received '+rs(rec)+'. Nothing is due.');return;}
+  show(html+'<div style="display:flex;gap:8px;margin-top:10px"><button style="background:#14b8a6" onclick="v72VpChoose(\'cash\')">Pay balance Cash</button><button style="background:#2563eb;color:#fff" onclick="v72VpChoose(\'gpay\')">Pay balance GPay</button></div>');
+  await say('Bill '+spellBill(add.billNo)+'. Total amount '+rs(total)+' rupees. Received '+rs(rec)+'. Cash '+rs(cash)+', G Pay '+rs(gp)+'. Balance '+rs(bal)+' rupees. Pay the balance by cash or G Pay?');
+  for(let tries=0;tries<2;tries++){
+   if(id!==sid||pend)return;
+   const a=await listen();if(id!==sid||pend)return;
+   if(a&&no(a)){show(html+'<div style="margin-top:8px">Cancelled.</div>');return;}
+   const md=a?modeIn(a):'';
+   if(md){await choose(id,md,amountIn(a));return;}
+   if(tries===0)await say('Please say cash or G Pay.');
+  }
+ }
+ window.v72VoicePay=function(){
+  sid++;pend=null;window.__v72bill=null;
+  v72dlg('<b>\uD83D\uDCB8 Voice payment</b><div style="font-size:12px;color:#94a3b8;margin:4px 0">Tap \uD83C\uDFA4 and say the bill number, e.g. "N L 20" or "P S K 1". The app reads the total, received, cash/GPay history and balance, then asks how to pay the balance. You confirm before it saves.</div><div style="display:flex"><input id="v72VpIn" class="input" placeholder="Bill no. e.g. NL20" autocomplete="off"><button type="button" id="v72VpMic" class="v72mic">\uD83C\uDFA4</button></div><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#14b8a6" id="v72VpGo">Check bill</button><button style="background:#334155;color:#fff" id="v72VpX">Close</button></div><div id="v72VpOut" style="margin-top:10px;padding:10px;border-radius:10px;background:#0f172a;min-height:40px"></div>');
+  setTimeout(()=>{const i=$('v72VpIn');if(!i)return;
+   $('v72VpGo').onclick=()=>start(i.value);
+   i.addEventListener('keydown',e=>{if(e.key==='Enter')start(i.value);});
+   $('v72VpX').onclick=()=>{sid++;pend=null;try{speechSynthesis.cancel();}catch(e){}$('v72Dlg').__done(1);};
+   $('v72VpMic').onclick=async()=>{try{speechSynthesis.cancel();}catch(e){}const t=await listen();if(t){i.value=t;start(t);}};},0);
+ };
+})();
+</script>
 </body></html>
