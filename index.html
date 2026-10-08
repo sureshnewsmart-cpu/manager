@@ -5191,4 +5191,53 @@ window.v72ImportTenantJson=async function(input){
  finally{input.value='';}
 };
 </script>
+<script id="v72vpay">
+(function(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ const STOP=['pay','paid','rs','for','of','by','via','the','and','got','add','cash','upi','in','to'];
+ const D=()=>document.getElementById('v72Dlg');
+ function parse(t){
+  t=String(t||'').toLowerCase().replace(/[,\u20B9]/g,'');
+  let bill='',rest=t;
+  for(const m of t.matchAll(/\b([a-z]{1,3})\s*-?\s*(\d{1,3})\b/g)){
+   if(STOP.includes(m[1]))continue;bill=cleanBill(m[1]+m[2]);rest=t.replace(m[0],' ');break;}
+  let amt=0;const am=rest.match(/(\d+(?:\.\d+)?)\s*(k|thousand|hundred|lakh|lac)?/);
+  if(am){amt=parseFloat(am[1]);const u=am[2];if(u==='k'||u==='thousand')amt*=1000;else if(u==='hundred')amt*=100;else if(u==='lakh'||u==='lac')amt*=100000;}
+  const mode=/gpay|g pay|google pay|phone ?pe|paytm|upi|online|bank|transfer/.test(t)?'gpay':'cash';
+  return {bill,amt:Math.round(amt*100)/100,mode};
+ }
+ async function find(){
+  const q=document.getElementById('v72VpIn').value,out=document.getElementById('v72VpOut');
+  const r=parse(q);
+  if(!r.bill){out.innerHTML='Say a bill number, the amount and cash or GPay. Example: "N1 paid 5000 cash".';return;}
+  if(!(r.amt>0)){out.innerHTML='I could not hear an amount for '+esc(r.bill)+'.';return;}
+  const add=(await getAll('addition')).find(b=>norm(b.billNo)===r.bill&&b.month===selectedMonth);
+  if(!add){out.innerHTML='Bill '+esc(r.bill)+' is not in Bill Addition for '+esc(selectedMonth)+'.';return;}
+  const man=(await getAll('manage')).find(m=>norm(m.billNo)===r.bill&&m.month===selectedMonth);
+  const rec=Number(man&&man.received||0),bal=Math.max(0,Number(add.billAmount||0)-rec);
+  window.__v72vp={add,bal,amt:r.amt,mode:r.mode};
+  const warn=r.amt>bal?'<div style="color:#f59e0b;margin-top:6px">\u26A0 This is more than the balance.</div>':'';
+  out.innerHTML='<div><b>'+esc(add.billNo)+'</b> \u2022 '+esc(selectedMonth)+'</div><div>Bill '+money(add.billAmount)+' \u2022 Received '+money(rec)+' \u2022 Balance <b>'+money(bal)+'</b></div><div style="margin-top:6px">Pay <b>'+money(r.amt)+'</b> by <b>'+(r.mode==='gpay'?'GPay':'Cash')+'</b></div>'+warn
+   +'<div style="display:flex;gap:8px;margin-top:10px"><button style="background:#22c55e" onclick="v72VpConfirm()">Record payment</button></div>';
+ }
+ window.v72VpConfirm=async function(){
+  const x=window.__v72vp;if(!x)return;window.__v72vp=null;
+  try{await doDualPay(x.add.billNo,x.bal,x.amt,x.mode);}catch(e){alert('Payment failed: '+(e.message||e));return;}
+  const d=D();if(d&&d.__done)d.__done(1);
+ };
+ window.v72VoicePay=function(){
+  v72dlg('<b>\uD83D\uDCB8 Voice payment</b><div style="font-size:12px;color:#94a3b8;margin:4px 0">Say or type: "N1 paid 5000 cash" or "S3 2500 GPay". You confirm before anything is saved.</div><div style="display:flex"><input id="v72VpIn" class="input" placeholder="N1 paid 5000 cash" autocomplete="off"><button type="button" id="v72VpMic" class="v72mic">\uD83C\uDFA4</button></div><div style="display:flex;gap:8px;margin-top:8px"><button style="background:#14b8a6" onclick="v72VpFind()">Check</button><button style="background:#334155;color:#fff" onclick="document.getElementById(\'v72Dlg\').__done(1)">Close</button></div><div id="v72VpOut" style="margin-top:10px;padding:10px;border-radius:10px;background:#0f172a;min-height:40px"></div>');
+  setTimeout(()=>{const i=document.getElementById('v72VpIn'),m=document.getElementById('v72VpMic');if(!i)return;
+   i.addEventListener('keydown',e=>{if(e.key==='Enter')find();});
+   m.onclick=()=>{if(!SR){toast('Voice input is not supported in this browser');return;}
+    const r=new SR();r.lang='en-IN';r.interimResults=false;m.classList.add('rec');
+    r.onresult=e=>{i.value=String(e.results[0][0].transcript||'');find();};
+    r.onerror=e=>toast('Voice error: '+(e.error||'unknown'));r.onend=()=>m.classList.remove('rec');
+    try{r.start();}catch(e){m.classList.remove('rec');}};},0);
+ };
+ window.v72VpFind=find;
+ const fab=document.createElement('button');fab.className='v72fab';fab.style.bottom='140px';fab.style.background='#22c55e';fab.textContent='\u20B9';fab.title='Voice payment';fab.onclick=()=>v72VoicePay();document.body.appendChild(fab);
+ const tools=document.getElementById('v72Tools');if(tools){const d=document.createElement('div');d.className='menu-item';d.textContent='\uD83D\uDCB8 Voice payment';d.onclick=()=>{closeDrawer();v72VoicePay();};tools.appendChild(d);}
+})();
+</script>
 </body></html>
