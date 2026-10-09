@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><title>Rent Manager V7.4</title><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script>if(typeof XLSX==='undefined'){window.XLSX=new Proxy({},{get(){try{toast('Excel library not loaded. Connect to the internet once so it can be cached, then retry.')}catch(e){console.warn(e)}throw new Error('XLSX library unavailable (offline)');}});}</script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#0f172a;color:#e2e8f0}.app-bar{position:sticky;top:0;z-index:40;background:#0f172a;border-bottom:1px solid rgba(255,255,255,0.1);padding:10px 14px;display:flex;justify-content:space-between;align-items:center}.hamburger{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer}.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;opacity:0;pointer-events:none;transition:0.3s}.drawer-overlay.open{opacity:1;pointer-events:auto}.drawer{position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:#1e293b;z-index:60;transform:translateX(-100%);transition:0.3s;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-header{padding:18px;border-bottom:1px solid rgba(255,255,255,0.06)}.drawer-menu{flex:1;overflow-y:auto;padding:8px}.menu-item{padding:10px 12px;border-radius:12px;display:flex;align-items:center;gap:8px;margin-bottom:3px;cursor:pointer;border:1px solid transparent;font-size:12px}.menu-item.active{background:rgba(20,184,166,0.12);border-color:rgba(20,184,166,0.3);color:#14b8a6}.menu-item:not(.active){color:#cbd5e1}.content{padding:10px;padding-bottom:90px;max-width:850px;margin:0 auto}.card{background:rgba(30,41,59,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:12px;margin-bottom:10px}.label{font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px}.input{width:100%;background:#0f172a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 11px;color:#fff;font-size:12px;outline:none}.input:focus{border-color:#14b8a6}.upload-zone{border:2px dashed rgba(20,184,166,0.4);border-radius:18px;padding:16px;text-align:center;background:rgba(20,184,166,0.06);cursor:pointer;font-size:12px}.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid rgba(255,255,255,0.08);margin-top:8px}table{width:100%;border-collapse:collapse;min-width:650px}th{font-size:12px;color:#94a3b8;padding:8px 6px;background:#0f172a;text-align:left;white-space:nowrap}td{padding:8px 6px;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);white-space:nowrap}tfoot td{background:rgba(20,184,166,0.12);font-weight:800}.btn{padding:8px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer}.btn-primary{background:#14b8a6;color:#0f172a}.btn-secondary{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1)}.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;border-radius:24px;font-size:12px;opacity:0;transition:0.3s;z-index:100;max-width:90vw;text-align:center}.toast.show{opacity:1}.empty{padding:18px;text-align:center;color:#64748b;font-size:12px}.badge-ok{background:rgba(20,184,166,0.15);color:#14b8a6;padding:2px 6px;border-radius:8px;font-size:12px;border:1px solid rgba(20,184,166,0.25)}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:70;display:none;align-items:flex-end}.modal-overlay.open{display:flex}.modal{background:#1e293b;border-radius:20px 20px 0 0;padding:14px;width:100%;max-height:85vh;overflow-y:auto}.quick-input{width:80px;background:#0f172a;border:1px solid rgba(20,184,166,0.5);border-radius:6px;padding:6px;color:#fff;font-size:12px;text-align:center}.dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.dash-card{background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px}.dash-card .big{font-size:16px;font-weight:800;color:#14b8a6;margin-top:3px}.folder-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}.folder{padding:8px 12px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(30,41,59,0.6);font-size:12px;font-weight:700;min-width:70px}.folder.active{background:rgba(20,184,166,0.15);border-color:#14b8a6;color:#14b8a6}</style><style id="ntModalFix">#ntFileModal{z-index:70}#ntEditModal{z-index:90}#ntBulkModal,#ntSingleModal{z-index:90}#tfwOverlay{z-index:95}#agrOverlay{z-index:96;align-items:flex-end}@media(min-width:700px){#agrOverlay{align-items:center}}.toast{pointer-events:none}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" media="print" onload="this.media='all'"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b1220"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><title>Rent Manager V7.5</title><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script>if(typeof XLSX==='undefined'){window.XLSX=new Proxy({},{get(){try{toast('Excel library not loaded. Connect to the internet once so it can be cached, then retry.')}catch(e){console.warn(e)}throw new Error('XLSX library unavailable (offline)');}});}</script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#0f172a;color:#e2e8f0}.app-bar{position:sticky;top:0;z-index:40;background:#0f172a;border-bottom:1px solid rgba(255,255,255,0.1);padding:10px 14px;display:flex;justify-content:space-between;align-items:center}.hamburger{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer}.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;opacity:0;pointer-events:none;transition:0.3s}.drawer-overlay.open{opacity:1;pointer-events:auto}.drawer{position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:#1e293b;z-index:60;transform:translateX(-100%);transition:0.3s;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-header{padding:18px;border-bottom:1px solid rgba(255,255,255,0.06)}.drawer-menu{flex:1;overflow-y:auto;padding:8px}.menu-item{padding:10px 12px;border-radius:12px;display:flex;align-items:center;gap:8px;margin-bottom:3px;cursor:pointer;border:1px solid transparent;font-size:12px}.menu-item.active{background:rgba(20,184,166,0.12);border-color:rgba(20,184,166,0.3);color:#14b8a6}.menu-item:not(.active){color:#cbd5e1}.content{padding:10px;padding-bottom:90px;max-width:850px;margin:0 auto}.card{background:rgba(30,41,59,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:12px;margin-bottom:10px}.label{font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px}.input{width:100%;background:#0f172a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 11px;color:#fff;font-size:12px;outline:none}.input:focus{border-color:#14b8a6}.upload-zone{border:2px dashed rgba(20,184,166,0.4);border-radius:18px;padding:16px;text-align:center;background:rgba(20,184,166,0.06);cursor:pointer;font-size:12px}.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid rgba(255,255,255,0.08);margin-top:8px}table{width:100%;border-collapse:collapse;min-width:650px}th{font-size:12px;color:#94a3b8;padding:8px 6px;background:#0f172a;text-align:left;white-space:nowrap}td{padding:8px 6px;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);white-space:nowrap}tfoot td{background:rgba(20,184,166,0.12);font-weight:800}.btn{padding:8px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer}.btn-primary{background:#14b8a6;color:#0f172a}.btn-secondary{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1)}.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;border-radius:24px;font-size:12px;opacity:0;transition:0.3s;z-index:100;max-width:90vw;text-align:center}.toast.show{opacity:1}.empty{padding:18px;text-align:center;color:#64748b;font-size:12px}.badge-ok{background:rgba(20,184,166,0.15);color:#14b8a6;padding:2px 6px;border-radius:8px;font-size:12px;border:1px solid rgba(20,184,166,0.25)}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:70;display:none;align-items:flex-end}.modal-overlay.open{display:flex}.modal{background:#1e293b;border-radius:20px 20px 0 0;padding:14px;width:100%;max-height:85vh;overflow-y:auto}.quick-input{width:80px;background:#0f172a;border:1px solid rgba(20,184,166,0.5);border-radius:6px;padding:6px;color:#fff;font-size:12px;text-align:center}.dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.dash-card{background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px}.dash-card .big{font-size:16px;font-weight:800;color:#14b8a6;margin-top:3px}.folder-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}.folder{padding:8px 12px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(30,41,59,0.6);font-size:12px;font-weight:700;min-width:70px}.folder.active{background:rgba(20,184,166,0.15);border-color:#14b8a6;color:#14b8a6}</style><style id="ntModalFix">#ntFileModal{z-index:70}#ntEditModal{z-index:90}#ntBulkModal,#ntSingleModal{z-index:90}#tfwOverlay{z-index:95}#agrOverlay{z-index:96;align-items:flex-end}@media(min-width:700px){#agrOverlay{align-items:center}}.toast{pointer-events:none}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" media="print" onload="this.media='all'"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b1220"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
 <div class="app-bar"><div style="display:flex;gap:8px;align-items:center"><div class="hamburger" id="ham">☰</div><div><div style="font-weight:800;font-size:13px">RENT MANAGER <span style="color:#14b8a6">V7 FINAL</span></div><div style="font-size:12px;color:#94a3b8" id="screenTitle">BILL PREPARING</div></div></div><div style="display:flex;gap:6px;align-items:center">
 <div style="font-size:12px;padding:3px 7px;border-radius:20px;background:rgba(20,184,166,0.15);color:#14b8a6;border:1px solid rgba(20,184,166,0.3)">V7 ✓ ALL FIXES</div>
 <button onclick="downloadFullApp()" style="font-size:12px;padding:5px 10px;border-radius:20px;background:#14b8a6;color:#0f172a;border:none;font-weight:800;cursor:pointer">⬇️ Download</button>
@@ -213,7 +213,8 @@
     <div style="padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:6px;flex-wrap:wrap;align-items:center">
       <button class="btn btn-primary" id="ntSimpleBtn" type="button" onclick="ntSetView('simple')">Simple View</button>
       <button class="btn btn-secondary" id="ntFileBtn" type="button" onclick="ntSetView('files')">File View</button>
-      <input id="ntSearch" class="input" style="flex:1;min-width:180px" placeholder="Search name / file / mobile / Aadhaar / ID" oninput="ntRender()">
+      <button class="btn btn-secondary" id="ntAdvCheckBtn" type="button" onclick="ntAdvanceCheck()">🧮 Advance Check</button>
+      <input id="ntSearch" class="input" style="flex:1;min-width:180px" placeholder="Search exact bill no (N1) / name / mobile / Aadhaar / ID" oninput="ntRender()">
     </div>
 
     <div id="ntSimpleMenus" style="padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:6px;flex-wrap:wrap">
@@ -3737,14 +3738,14 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
     const all=document.createElement('div');
     all.className='folder '+(NT.group==='all'?'active':'');
     all.innerHTML=`📂 All<br><small>${NT.files.length} files</small>`;
-    all.onclick=()=>{NT.group='all';renderFolders();render()};
+    all.onclick=()=>{NT.advCheck=false;NT.group='all';renderFolders();render()};
     c.appendChild(all);
     groupList().forEach(g=>{
       const name=n(g.name), count=NT.files.filter(f=>f.group===name).length;
       const d=document.createElement('div');
       d.className='folder '+(NT.group===name?'active':'');
       d.innerHTML=`📁 ${esc(name)}<br><small>${count} files</small>`;
-      d.onclick=()=>{NT.group=name;renderFolders();render()};
+      d.onclick=()=>{NT.advCheck=false;NT.group=name;renderFolders();render()};
       c.appendChild(d);
     });
     renderStatusFolders();
@@ -3775,7 +3776,7 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
       const cnt=base.filter(f=>statusMatch(f,k)).length;
       const d=document.createElement('div');d.className='folder '+(NT.status===k?'active':'');
       d.innerHTML=`${label}<br><small>${cnt} files</small>`;
-      d.onclick=()=>{NT.status=NT.status===k?null:k;renderStatusFolders();render();};
+      d.onclick=()=>{NT.advCheck=false;NT.status=NT.status===k?null:k;renderStatusFolders();render();};
       c.appendChild(d);
     });
     const h=$('ntStatusHint');
@@ -3783,9 +3784,10 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
   }
   function statusRows(){
     const q=n($('ntSearch')?.value||'');
-    return filesInGroup(NT.group).filter(f=>statusMatch(f,NT.status)).filter(f=>{
+    return scopeFiles(q).filter(f=>statusMatch(f,NT.status)).filter(f=>{
       if(!q)return true;
-      if(isFileQuery(q))return n(f.fileName)===q;
+      if(isFileQuery(q))return sameFile(f.fileName,q);
+      if(isRollQuery(q)){if(rollIs(f,q))return true;if(q.length<3)return false;}
       return n(f.fileName).includes(q)||f.persons.some(p=>[p.name,p.mobile,p.idNumber].some(v=>n(v).includes(q)));
     }).sort((a,b)=>n(a.group).localeCompare(n(b.group))||Number(a.roll||0)-Number(b.roll||0));
   }
@@ -3825,10 +3827,18 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
   const nd=v=>String(v||'').replace(/\D/g,'');
   const alnum=v=>String(v||'').replace(/[^A-Za-z0-9]/g,'').toUpperCase();
   // person-level match: file number shows every person; otherwise only the person that matches
-  const isFileQuery=q=>/^[A-Z]+\d+$/.test(q);   // N1, AB12 = exact file only (N1 must not show N10, N11)
+  // Bill number search is EXACT: N1 / n1 / N 1 / N-1 / N01 all mean file N1 only (never N10, N11...)
+  const fileKey=v=>{const m=/^([A-Z]+)[\s\-_.]*0*(\d+)$/.exec(n(v));return m?m[1]+m[2]:null;};
+  const isFileQuery=q=>fileKey(q)!==null;
+  const sameFile=(fileName,q)=>{const a=fileKey(fileName);return a!==null&&a===fileKey(q);};
+  const isRollQuery=q=>/^\d{1,3}$/.test(q);          // digits only = roll number (1 -> N1, A1), exact
+  const rollIs=(f,q)=>Number(f.roll||0)===Number(q);
+  // Exact bill / roll numbers are searched across ALL groups, even when a group folder is selected
+  const scopeFiles=q=>(isFileQuery(q)||isRollQuery(q))?NT.files:filesInGroup(NT.group);
   function personMatch(f,p,q){
     if(!q)return true;
-    if(isFileQuery(q))return n(f.fileName)===q;
+    if(isFileQuery(q))return sameFile(f.fileName,q);
+    if(isRollQuery(q)){if(rollIs(f,q))return true;if(q.length<3)return false;}
     if(n(f.fileName).includes(q))return true;
     if(n(p.name).includes(q))return true;
     const qd=nd(q),qa=alnum(q);
@@ -3838,9 +3848,10 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
   }
   function searchRows(){
     const q=n($('ntSearch')?.value||'');
-    return filesInGroup(NT.group).filter(f=>{
+    return scopeFiles(q).filter(f=>{
       if(!q)return true;
-      if(isFileQuery(q))return n(f.fileName)===q;
+      if(isFileQuery(q))return sameFile(f.fileName,q);
+      if(isRollQuery(q)){if(rollIs(f,q))return true;if(q.length<3)return false;}
       return n(f.fileName).includes(q)||f.persons.some(p=>personMatch(f,p,q));
     });
   }
@@ -3856,6 +3867,7 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
   function render(){
     const c=$('ntContent'); if(!c)return;
     setSimpleButtons();
+    if(NT.advCheck){renderAdvCheck();return;}
     if(NT.status){renderStatus();return;}
     const rows=searchRows();
     if(NT.view==='simple'){
@@ -3906,9 +3918,78 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
     </div>`).join(''):'<div class="empty">No matching file found.</div>';
   }
 
+
+  /* ===== ADVANCE CHECK: finds advance mismatches in Tenant File Manager ===== */
+  const ADV_MINUS=['debit','deducted','deduct','refund'];
+  function advReplay(f){let t=0;(Array.isArray(f.advance?.history)?f.advance.history:[]).forEach(h=>{const a=Number(h.amount)||0;t+=ADV_MINUS.includes(String(h.type||'').toLowerCase())?-a:a;});return Math.round(t*100)/100;}
+  async function advCheckData(){
+    let adds=[];try{adds=(await getAll('addition')).filter(a=>a.month===selectedMonth);}catch(e){console.warn(e)}
+    const out=[];
+    const fresh=(await __tenantGetAll()).map(normFile);   // always read the latest saved files
+    for(const f of fresh){
+      const total=Math.round((Number(f.advance?.total)||0)*100)/100,replay=advReplay(f),hasP=f.persons.length>0;
+      if(!hasP&&total===0&&replay===0&&!(f.advance.history||[]).length)continue;   // empty vacant file
+      let st=null;try{st=await advanceStateForBill(f.fileName);}catch(e){console.warn(e)}
+      const required=hasP&&st?Number(st.expected)||0:0;
+      const row=adds.find(a=>norm(a.billNo)===norm(f.fileName));
+      const billAdv=row?Math.round((Number(row.advanceBalance)||0)*100)/100:null;
+      const issues=[];
+      if(Math.abs(total-replay)>0.009)issues.push('LEDGER');
+      if(billAdv!==null&&Math.abs(billAdv-total)>0.009)issues.push('BILLROW');
+      if(hasP&&required>0&&total<required)issues.push('SHORT');
+      out.push({f,total,replay,required,billAdv,issues,hasP});
+    }
+    return out;
+  }
+  async function renderAdvCheck(){
+    const c=$('ntContent');if(!c)return;
+    c.innerHTML='<div class="empty">Checking advances...</div>';
+    const all=await advCheckData();
+    const q=n($('ntSearch')?.value||'');
+    const visible=new Set(searchRows().map(f=>f.fileName));
+    let rows=all.filter(r=>!q||visible.has(r.f.fileName));
+    const onlyProblems=NT.advOnly!==false;
+    const cnt=k=>rows.filter(r=>r.issues.includes(k)).length;
+    const shown=onlyProblems?rows.filter(r=>r.issues.length):rows;
+    const money=v=>'₹'+(Math.round(Number(v)*100)/100).toLocaleString('en-IN');
+    const badge=(t,col)=>`<span style="background:${col}22;color:${col};border:1px solid ${col}55;padding:1px 7px;border-radius:9px;font-size:11px;font-weight:800">${t}</span>`;
+    let h=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px"><div class="label" style="margin:0">🧮 Advance Check • ${rows.length} files checked</div><div style="display:flex;gap:6px;flex-wrap:wrap">${cnt('BILLROW')?`<button class="btn btn-primary" type="button" onclick="ntAdvSyncAll()">Sync all Bill Addition rows</button>`:''}<button class="btn btn-secondary" type="button" onclick="ntAdvToggleOnly()">${onlyProblems?'Show all files':'Show problems only'}</button><button class="btn btn-secondary" type="button" onclick="ntAdvClose()">✖ Close</button></div></div>`;
+    h+=`<div style="font-size:12px;color:#94a3b8;margin-bottom:8px;line-height:1.5">${badge('LEDGER '+cnt('LEDGER'),'#ef4444')} Final advance ≠ sum of its history &nbsp; ${badge('BILL ROW '+cnt('BILLROW'),'#f59e0b')} Bill Addition (${esc(selectedMonth)}) still shows an older advance (refreshes by itself when Bill Addition opens) &nbsp; ${badge('SHORT '+cnt('SHORT'),'#f59e0b')} Paid advance is less than the group's required advance</div>`;
+    if(!shown.length)h+=`<div class="empty">${onlyProblems?'🎉 No advance mismatch found.':'No files.'}</div>`;
+    h+=shown.map(r=>{const f=r.f,fn=esc(f.fileName);
+      const ok=!r.issues.length;
+      const fixes=[];
+      if(r.issues.includes('LEDGER'))fixes.push(`<button class="btn btn-secondary" type="button" onclick="ntAdvFix('${fn}','keep')">Keep total ${money(r.total)} (add adjustment entry)</button>`,`<button class="btn btn-secondary" type="button" onclick="ntAdvFix('${fn}','history')">Use history total ${money(r.replay)}</button>`);
+      if(r.issues.includes('BILLROW'))fixes.push(`<button class="btn btn-primary" type="button" onclick="ntAdvFix('${fn}','bill')">Sync Bill Addition to ${money(r.total)}</button>`);
+      return `<div class="card" style="margin:0 0 8px;padding:10px;border-left:3px solid ${ok?'#14b8a6':'#f59e0b'}"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b style="cursor:pointer" onclick="ntOpenFile('${fn}')">📄 ${fn}</b><span>${ok?badge('OK','#14b8a6'):r.issues.map(i=>badge(i==='BILLROW'?'BILL ROW':i,i==='LEDGER'?'#ef4444':'#f59e0b')).join(' ')}</span></div><div style="font-size:12px;color:#cbd5e1;margin-top:6px;line-height:1.7">Final advance: <b>${money(r.total)}</b> • History sum: <b>${money(r.replay)}</b>${r.issues.includes('LEDGER')?` • Difference: <b style="color:#ef4444">${money(r.total-r.replay)}</b>`:''}<br>Persons: ${f.persons.length}${r.hasP?` • Required: <b>${money(r.required)}</b>${r.issues.includes('SHORT')?` • Short by <b style="color:#f59e0b">${money(r.required-r.total)}</b>`:''}`:''}${r.billAdv!==null?`<br>Bill Addition advance: <b>${money(r.billAdv)}</b>`:''}</div>${fixes.length?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${fixes.join('')}</div>`:''}</div>`;}).join('');
+    c.innerHTML=h;
+  }
+  window.ntAdvanceCheck=()=>{NT.advCheck=true;NT.status=null;try{renderStatusFolders();}catch(e){console.warn(e)}render();};
+  window.ntAdvSyncAll=async()=>{const all=await advCheckData();for(const r of all.filter(r=>r.issues.includes('BILLROW')))await refreshBillAdvanceStatusFromTenant(r.f.fileName);toastNT('Bill Addition advances synced ✓');render();};
+  window.ntAdvClose=()=>{NT.advCheck=false;render();};
+  window.ntAdvToggleOnly=()=>{NT.advOnly=NT.advOnly===false;render();};
+  window.ntAdvFix=async(fileName,mode)=>{
+    const f=(await __tenantGetAll()).map(normFile).find(x=>n(x.fileName)===n(fileName));if(!f)return;
+    const total=Number(f.advance.total)||0,replay=advReplay(f),diff=Math.round((total-replay)*100)/100,date=today();
+    if(mode!=='bill'){
+      const msg=mode==='keep'?`Keep final advance ₹${total} for ${f.fileName} and add one adjustment entry of ₹${Math.abs(diff)} (${diff>0?'added':'debit'}) so the history matches?`:`Change final advance of ${f.fileName} from ₹${total} to ₹${replay} (history sum)?`;
+      let ok=true;try{ok=await appConfirm(msg);}catch(e){ok=confirm(msg);}
+      if(!ok)return;
+      f.advance.history=Array.isArray(f.advance.history)?f.advance.history:[];
+      if(mode==='keep'){f.advance.history.push({id:genId(),type:diff>0?'add':'debit',amount:Math.abs(diff),oldTotal:replay,newTotal:total,date,note:'Mismatch adjustment - history aligned to final advance'});}
+      else{f.advance.total=Math.max(0,replay);}
+      f.historyLog=Array.isArray(f.historyLog)?f.historyLog:[];f.historyLog.push({id:genId(),type:'advance_adjust',message:`Advance mismatch fixed (${mode==='keep'?'kept total ₹'+total:'total set to ₹'+Math.max(0,replay)})`,date});
+      f.updatedAt=now();
+      const all=await __tenantGetAll();await __tenantPutAll(all.map(x=>n(x.fileName)===n(f.fileName)?f:x));
+    }
+    await refreshBillAdvanceStatusFromTenant(f.fileName);
+    await load();
+    toastNT('Advance mismatch fixed ✓');
+  };
+
   window.ntRender=render;
   window.ntSetView=v=>{
-    NT.view=v;NT.status=null;try{renderStatusFolders();}catch(__e){__swallow(__e)}
+    NT.view=v;NT.status=null;NT.advCheck=false;try{renderStatusFolders();}catch(__e){__swallow(__e)}
     $('ntSimpleBtn')?.classList.toggle('btn-primary',v==='simple');
     $('ntSimpleBtn')?.classList.toggle('btn-secondary',v!=='simple');
     $('ntFileBtn')?.classList.toggle('btn-primary',v==='files');
