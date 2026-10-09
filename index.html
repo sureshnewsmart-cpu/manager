@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><title>Rent Manager V7.3</title><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script>if(typeof XLSX==='undefined'){window.XLSX=new Proxy({},{get(){try{toast('Excel library not loaded. Connect to the internet once so it can be cached, then retry.')}catch(e){console.warn(e)}throw new Error('XLSX library unavailable (offline)');}});}</script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#0f172a;color:#e2e8f0}.app-bar{position:sticky;top:0;z-index:40;background:#0f172a;border-bottom:1px solid rgba(255,255,255,0.1);padding:10px 14px;display:flex;justify-content:space-between;align-items:center}.hamburger{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer}.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;opacity:0;pointer-events:none;transition:0.3s}.drawer-overlay.open{opacity:1;pointer-events:auto}.drawer{position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:#1e293b;z-index:60;transform:translateX(-100%);transition:0.3s;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-header{padding:18px;border-bottom:1px solid rgba(255,255,255,0.06)}.drawer-menu{flex:1;overflow-y:auto;padding:8px}.menu-item{padding:10px 12px;border-radius:12px;display:flex;align-items:center;gap:8px;margin-bottom:3px;cursor:pointer;border:1px solid transparent;font-size:12px}.menu-item.active{background:rgba(20,184,166,0.12);border-color:rgba(20,184,166,0.3);color:#14b8a6}.menu-item:not(.active){color:#cbd5e1}.content{padding:10px;padding-bottom:90px;max-width:850px;margin:0 auto}.card{background:rgba(30,41,59,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:12px;margin-bottom:10px}.label{font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px}.input{width:100%;background:#0f172a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 11px;color:#fff;font-size:12px;outline:none}.input:focus{border-color:#14b8a6}.upload-zone{border:2px dashed rgba(20,184,166,0.4);border-radius:18px;padding:16px;text-align:center;background:rgba(20,184,166,0.06);cursor:pointer;font-size:12px}.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid rgba(255,255,255,0.08);margin-top:8px}table{width:100%;border-collapse:collapse;min-width:650px}th{font-size:12px;color:#94a3b8;padding:8px 6px;background:#0f172a;text-align:left;white-space:nowrap}td{padding:8px 6px;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);white-space:nowrap}tfoot td{background:rgba(20,184,166,0.12);font-weight:800}.btn{padding:8px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer}.btn-primary{background:#14b8a6;color:#0f172a}.btn-secondary{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1)}.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;border-radius:24px;font-size:12px;opacity:0;transition:0.3s;z-index:100;max-width:90vw;text-align:center}.toast.show{opacity:1}.empty{padding:18px;text-align:center;color:#64748b;font-size:12px}.badge-ok{background:rgba(20,184,166,0.15);color:#14b8a6;padding:2px 6px;border-radius:8px;font-size:12px;border:1px solid rgba(20,184,166,0.25)}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:70;display:none;align-items:flex-end}.modal-overlay.open{display:flex}.modal{background:#1e293b;border-radius:20px 20px 0 0;padding:14px;width:100%;max-height:85vh;overflow-y:auto}.quick-input{width:80px;background:#0f172a;border:1px solid rgba(20,184,166,0.5);border-radius:6px;padding:6px;color:#fff;font-size:12px;text-align:center}.dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.dash-card{background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px}.dash-card .big{font-size:16px;font-weight:800;color:#14b8a6;margin-top:3px}.folder-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}.folder{padding:8px 12px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(30,41,59,0.6);font-size:12px;font-weight:700;min-width:70px}.folder.active{background:rgba(20,184,166,0.15);border-color:#14b8a6;color:#14b8a6}</style><style id="ntModalFix">#ntFileModal{z-index:70}#ntEditModal{z-index:90}#ntBulkModal,#ntSingleModal{z-index:90}#tfwOverlay{z-index:95}#agrOverlay{z-index:96;align-items:flex-end}@media(min-width:700px){#agrOverlay{align-items:center}}.toast{pointer-events:none}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" media="print" onload="this.media='all'"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b1220"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><title>Rent Manager V7.4</title><script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script><script>if(typeof XLSX==='undefined'){window.XLSX=new Proxy({},{get(){try{toast('Excel library not loaded. Connect to the internet once so it can be cached, then retry.')}catch(e){console.warn(e)}throw new Error('XLSX library unavailable (offline)');}});}</script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#0f172a;color:#e2e8f0}.app-bar{position:sticky;top:0;z-index:40;background:#0f172a;border-bottom:1px solid rgba(255,255,255,0.1);padding:10px 14px;display:flex;justify-content:space-between;align-items:center}.hamburger{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer}.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;opacity:0;pointer-events:none;transition:0.3s}.drawer-overlay.open{opacity:1;pointer-events:auto}.drawer{position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:#1e293b;z-index:60;transform:translateX(-100%);transition:0.3s;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-header{padding:18px;border-bottom:1px solid rgba(255,255,255,0.06)}.drawer-menu{flex:1;overflow-y:auto;padding:8px}.menu-item{padding:10px 12px;border-radius:12px;display:flex;align-items:center;gap:8px;margin-bottom:3px;cursor:pointer;border:1px solid transparent;font-size:12px}.menu-item.active{background:rgba(20,184,166,0.12);border-color:rgba(20,184,166,0.3);color:#14b8a6}.menu-item:not(.active){color:#cbd5e1}.content{padding:10px;padding-bottom:90px;max-width:850px;margin:0 auto}.card{background:rgba(30,41,59,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:12px;margin-bottom:10px}.label{font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px}.input{width:100%;background:#0f172a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 11px;color:#fff;font-size:12px;outline:none}.input:focus{border-color:#14b8a6}.upload-zone{border:2px dashed rgba(20,184,166,0.4);border-radius:18px;padding:16px;text-align:center;background:rgba(20,184,166,0.06);cursor:pointer;font-size:12px}.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid rgba(255,255,255,0.08);margin-top:8px}table{width:100%;border-collapse:collapse;min-width:650px}th{font-size:12px;color:#94a3b8;padding:8px 6px;background:#0f172a;text-align:left;white-space:nowrap}td{padding:8px 6px;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);white-space:nowrap}tfoot td{background:rgba(20,184,166,0.12);font-weight:800}.btn{padding:8px 14px;border-radius:10px;border:none;font-weight:700;font-size:12px;cursor:pointer}.btn-primary{background:#14b8a6;color:#0f172a}.btn-secondary{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1)}.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid rgba(255,255,255,0.15);padding:10px 16px;border-radius:24px;font-size:12px;opacity:0;transition:0.3s;z-index:100;max-width:90vw;text-align:center}.toast.show{opacity:1}.empty{padding:18px;text-align:center;color:#64748b;font-size:12px}.badge-ok{background:rgba(20,184,166,0.15);color:#14b8a6;padding:2px 6px;border-radius:8px;font-size:12px;border:1px solid rgba(20,184,166,0.25)}.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:70;display:none;align-items:flex-end}.modal-overlay.open{display:flex}.modal{background:#1e293b;border-radius:20px 20px 0 0;padding:14px;width:100%;max-height:85vh;overflow-y:auto}.quick-input{width:80px;background:#0f172a;border:1px solid rgba(20,184,166,0.5);border-radius:6px;padding:6px;color:#fff;font-size:12px;text-align:center}.dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.dash-card{background:#1e293b;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:12px}.dash-card .big{font-size:16px;font-weight:800;color:#14b8a6;margin-top:3px}.folder-row{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}.folder{padding:8px 12px;border-radius:12px;text-align:center;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(30,41,59,0.6);font-size:12px;font-weight:700;min-width:70px}.folder.active{background:rgba(20,184,166,0.15);border-color:#14b8a6;color:#14b8a6}</style><style id="ntModalFix">#ntFileModal{z-index:70}#ntEditModal{z-index:90}#ntBulkModal,#ntSingleModal{z-index:90}#tfwOverlay{z-index:95}#agrOverlay{z-index:96;align-items:flex-end}@media(min-width:700px){#agrOverlay{align-items:center}}.toast{pointer-events:none}</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&display=swap" media="print" onload="this.media='all'"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b1220"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
 <div class="app-bar"><div style="display:flex;gap:8px;align-items:center"><div class="hamburger" id="ham">☰</div><div><div style="font-weight:800;font-size:13px">RENT MANAGER <span style="color:#14b8a6">V7 FINAL</span></div><div style="font-size:12px;color:#94a3b8" id="screenTitle">BILL PREPARING</div></div></div><div style="display:flex;gap:6px;align-items:center">
 <div style="font-size:12px;padding:3px 7px;border-radius:20px;background:rgba(20,184,166,0.15);color:#14b8a6;border:1px solid rgba(20,184,166,0.3)">V7 ✓ ALL FIXES</div>
 <button onclick="downloadFullApp()" style="font-size:12px;padding:5px 10px;border-radius:20px;background:#14b8a6;color:#0f172a;border:none;font-weight:800;cursor:pointer">⬇️ Download</button>
@@ -266,7 +266,10 @@ function todayLocal(){return localISO(new Date());}
 function localMonth(d){return localISO(d).slice(0,7);}
 function cleanBill(s){return String(s==null?'':s).toUpperCase().replace(/\s+/g,'').replace(/[^A-Z0-9_\-]/g,'');}
 function mkId(billNo,month){return norm(billNo)+'_'+month;}
-function splitCsvLine(line){const out=[];let cur='',q=false;line=String(line==null?'':line);for(let i=0;i<line.length;i++){const ch=line[i];if(q){if(ch==='"'){if(line[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=ch;}else if(ch==='"'&&cur.trim()===''){q=true;cur='';}else if(ch===','){out.push(cur.trim());cur='';}else cur+=ch;}out.push(cur.trim());return out;}
+
+/* Safe CSV cell: always quoted, " escaped, and text starting with = + - @ is neutralised so Excel cannot run it as a formula. */
+function csvCell(v){let t=String(v==null?'':v);if(/^[=+\-@\t\r]/.test(t)&&!Number.isFinite(Number(t.replace(/[,\s\u20B9]/g,''))))t="'"+t;return '"'+t.replace(/"/g,'""')+'"';}
+function splitCsvLine(line,delim){delim=delim||',';const out=[];let cur='',q=false;line=String(line==null?'':line);for(let i=0;i<line.length;i++){const ch=line[i];if(q){if(ch==='"'){if(line[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=ch;}else if(ch==='"'&&cur.trim()===''){q=true;cur='';}else if(ch===delim){out.push(cur.trim());cur='';}else cur+=ch;}out.push(cur.trim());return out;}
 function parseCsvNumber(v){return parseFloat(String(v==null?'':v).replace(/[,\s\u20B9]/g,''));}
 function dbFail(ctx,e){console.error('[DB]',ctx,e);try{toast('Database error ('+ctx+'): '+((e&&e.message)||e));}catch(__e){__swallow(__e)}}
 async function migrateBillIds(){try{let moved=0,conflicts=0;for(const store of ['preparing','addition','manage']){const rows=await getAll(store);const have=new Set(rows.map(r=>r.id));for(const r of rows){if(!r||!r.billNo||!r.month)continue;const want=mkId(r.billNo,r.month);if(r.id===want)continue;if(String(r.id)!==String(r.billNo)+'_'+r.month)continue;if(have.has(want)){conflicts++;continue;}await put(store,{...r,id:want});await del(store,r.id);have.add(want);have.delete(r.id);moved++;}}if(moved||conflicts)console.info('[migrate] bill ids normalised:',moved,'conflicts left untouched:',conflicts);}catch(e){console.warn('ID migration skipped',e);}}
@@ -318,7 +321,34 @@ function parsePreparingCSV(text){
   }
   const arr=[...byBill.values()];arr.warnings=warnings;return arr;
 }
-function parsePersonsCSV(text){const lines=String(text||'').replace(/^\uFEFF/,'').trim().split(/\r?\n/);if(!lines.length||!lines[0])return[];let start=0;const first=lines[0].toLowerCase();if(/bill\s*(no|number)|previous\s*balance|prev\s*bal|person/.test(first))start=1;const arr=[];for(let i=start;i<lines.length;i++){const line=lines[i].trim();if(!line)continue;const cols=splitCsvLine(line);if(cols.length<2)continue;const billNo=cleanBill(cols[0]);const prev=parseCsvNumber(cols[1]);if(!billNo||!Number.isFinite(prev))continue;let persons=null;if(cols.length>=3&&String(cols[2]).trim()!==''){const pc=parseCsvNumber(cols[2]);if(Number.isFinite(pc)&&pc>=0)persons=Math.floor(pc);}arr.push({billNo,prev,persons});}return arr;}
+function parsePersonsCSV(text){
+  const lines=String(text||'').replace(/^\uFEFF/,'').split(/\r?\n/).filter(l=>l.trim()!=='');
+  const arr=[];arr.skipped=0;arr.badPersons=0;arr.negatives=0;arr.skippedSample=[];arr.delimiter=',';
+  if(!lines.length)return arr;
+  // auto-detect delimiter (comma, semicolon or tab) from the first line - Excel in some regions saves ; or tab
+  const f0=lines[0];const cnt=ch=>f0.split(ch).length-1;
+  let delim=',';if(cnt(';')>cnt(',')&&cnt(';')>=cnt('\t'))delim=';';else if(cnt('\t')>cnt(',')&&cnt('\t')>cnt(';'))delim='\t';
+  arr.delimiter=delim;
+  let start=0;if(/bill\s*(no|number)|previous\s*balance|prev\s*bal|person/.test(f0.toLowerCase()))start=1;
+  const MAXP=50;
+  for(let i=start;i<lines.length;i++){
+    const cols=splitCsvLine(lines[i].trim(),delim);
+    const billNo=cleanBill(cols[0]);
+    let ps=String(cols[1]==null?'':cols[1]).trim();
+    if(delim===';'&&/^-?[\d.]*\d,\d{1,2}$/.test(ps))ps=ps.replace(/\./g,'').replace(',','.'); // European decimal comma
+    const prev=parseCsvNumber(ps);
+    if(cols.length<2||!billNo||!Number.isFinite(prev)){arr.skipped++;if(arr.skippedSample.length<3)arr.skippedSample.push(lines[i].trim().slice(0,40));continue;}
+    let persons=null;
+    if(cols.length>=3&&String(cols[2]).trim()!==''){
+      const raw=String(cols[2]).trim();
+      if(/^\d+(\.0+)?$/.test(raw)&&Number(raw)<=MAXP)persons=Math.floor(Number(raw));
+      else arr.badPersons++;   // text, decimals like 2.7, negative or above 50 -> ignored and reported
+    }
+    if(prev<0)arr.negatives++;
+    arr.push({billNo,prev,persons});
+  }
+  return arr;
+}
 function parseMsgCSV(text){const lines=text.trim().split(/\r?\n/);let start=0;if(lines[0]&&lines[0].toLowerCase().includes('bill')) start=1;const arr=[];for(let i=start;i<lines.length;i++){const line=lines[i].trim();if(!line) continue;const cols=splitCsvLine(line);if(cols.length<2) continue;{const bn=cleanBill(cols[0]),mb=String(cols[1]||'').replace(/[^0-9+]/g,'');if(bn&&mb)arr.push({billNo:bn,mobile:mb});}}return arr;}
 async function purgeOutOfRangeBillRows(){
   const allGroups=await getAll('groups');
@@ -363,6 +393,7 @@ window.toggleTfmLink=async function(){
   if(!ok)return;
   try{localStorage.setItem(TFM_LINK_KEY,on?'0':'1');}catch(e){toast('Could not save setting (storage blocked)');return;}
   updateTfmLinkUI();
+  if(tfmConnected()){try{await syncAllTenantGroupFiles();}catch(e){console.warn(e)}}
   try{await ensureBillStoresFromTenantFiles();await loadAddition();if(typeof loadPreparing==='function')await loadPreparing();if(typeof loadManage==='function')await loadManage();if(typeof loadGroupsSection==='function')await loadGroupsSection();}catch(e){console.warn(e)}
   toast(on?'Tenant File Manager disconnected - use CSV with Person Count':'Tenant File Manager connected ✓');
 };
@@ -759,6 +790,7 @@ function renderAddition(){
 }
 
 async function mergePersons(rows){
+  if(!rows||!rows.length){const sk=rows&&rows.skipped?` (${rows.skipped} line(s) not understood${rows.skippedSample&&rows.skippedSample.length?': '+rows.skippedSample.join(' | '):''})`:'';toast('❌ No valid rows found'+sk+'. Columns needed: Bill Number, Previous Balance, Person Count');return;}
   const freshAdd=await getAll('addition');
   addition=freshAdd;
   const allGroups=await getAll('groups');
@@ -821,7 +853,11 @@ async function mergePersons(rows){
   await loadGroupsSection();
   if(window.activeScreen==='reference') await loadReference();
   if(window.activeScreen==='filter') await loadFilterBy();
-  toast(linked?`Previous balances imported • ${rows.length-unmatched} matched${unmatched?` • ${unmatched} unmatched ignored`:''} • Tenant persons used automatically ✓`:`CSV imported • ${rows.length-unmatched} bills • ${personsApplied} person counts${personsApplied?'':' (no Person Count column - existing counts kept)'}${unmatched?` • ${unmatched} unknown bill(s) ignored`:''} ✓`);
+  const _notes=[];
+    if(rows.skipped)_notes.push(`${rows.skipped} line(s) skipped`+(rows.skippedSample&&rows.skippedSample.length?' ('+rows.skippedSample.join(' | ')+')':''));
+    if(!linked&&rows.badPersons)_notes.push(`${rows.badPersons} invalid Person Count ignored (whole numbers 0-50 only)`);
+    if(rows.negatives)_notes.push(`${rows.negatives} negative balance(s) taken as credit`);
+    toast((linked?`Previous balances imported • ${rows.length-unmatched} matched${unmatched?` • ${unmatched} unmatched ignored`:''} • Tenant persons used automatically ✓`:`CSV imported • ${rows.length-unmatched} bills • ${personsApplied} person counts${personsApplied?'':(rows.badPersons?' (no valid Person Count - existing counts kept)':' (no Person Count column - existing counts kept)')}${unmatched?` • ${unmatched} unknown bill(s) ignored`:''} ✓`)+(_notes.length?' ⚠ '+_notes.join('; '):''));
 }
 async function loadGroups(){
   groups=await getAll('groups');
@@ -1518,7 +1554,7 @@ async function vacRenderHistory(q){
 window.vacExportCsv=async()=>{
   const rows=await vacRows(norm(document.getElementById('filterSearch').value||''));
   if(!rows.length){toast('No vacate history to export');return;}
-  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const q=csvCell;
   const csv='\ufeff'+['File No,Name,Advance,Bill Amount,Settlement,Amount,Vacate Date'].concat(rows.map(r=>[r.file,r.name,r.advance.toFixed(2),r.bill.toFixed(2),r.repay?'Repaid to tenant':'Received from tenant',r.amt.toFixed(2),r.date].map(q).join(','))).join('\r\n')+'\r\n';
   const u=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download='Vacate-History-'+todayLocal()+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);
   toast(rows.length+' record(s) exported ✓');
@@ -1606,7 +1642,7 @@ async function loadNewcomers(search){
 }
 window.ncExportCsv=()=>{
   const rows=window.__ncRows||[];if(!rows.length){toast('No new-comers to export');return;}
-  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const q=csvCell;
   const csv='\ufeff'+['Month,Date,Bill No,Main Person,Advance Paid,Advance Balance,Advance Date'].concat(rows.map(r=>[r.month,r.date,r.file,r.name,r.advance.toFixed(2),r.advanceBalance.toFixed(2),r.advDate].map(q).join(','))).join('\r\n')+'\r\n';
   const u=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download='New-Comers-'+(document.getElementById('ncMonth').value||'all')+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);
   toast(rows.length+' record(s) exported ✓');
@@ -1639,7 +1675,7 @@ async function resolveEndOnly(csv,tenantSet){
 }
 window.downloadEndTemplate=async()=>{
   const rows=(await getAll('preparing')).filter(p=>p.month===selectedMonth).sort(billNaturalCompare);
-  const csv='\ufeffBillNo,End\r\n'+rows.map(r=>r.billNo+',').join('\r\n')+'\r\n';
+  const csv='\ufeffBillNo,End\r\n'+rows.map(r=>csvCell(r.billNo)+',').join('\r\n')+'\r\n';
   const u=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download='End-readings-'+selectedMonth+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);
   toast(rows.length+' bill number(s) in the template - fill the End column');
 };
@@ -1733,7 +1769,7 @@ async function exportPermanentResetHistory(){
   all.filter(x=>x&&x.billNo).sort((a,b)=>String(b.resetDate||'').localeCompare(String(a.resetDate||''))).forEach(r=>{const k=norm(r.billNo);if(!byBill.has(k))byBill.set(k,[]);if(byBill.get(k).length<3)byBill.get(k).push(r);});
   const rows=[...byBill.values()].flat();
   if(!rows.length){toast('No pre-reset history to export');return;}
-  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"',out=['Reset Date,Month,Bill No,Bill Amount,Previous Balance,Received,Final Balance Before Reset,Payment Date,Payment Amount,Mode,Payment Balance,Start Reading Before Reset,End Reading Before Reset,Reset Scope'];
+  const q=csvCell,out=['Reset Date,Month,Bill No,Bill Amount,Previous Balance,Received,Final Balance Before Reset,Payment Date,Payment Amount,Mode,Payment Balance,Start Reading Before Reset,End Reading Before Reset,Reset Scope'];
   rows.sort((a,b)=>String(a.resetDate||'').localeCompare(String(b.resetDate||''))||billNaturalCompare(a.billNo,b.billNo));
   for(const r of rows){
     const pays=resetHistPaymentRows(r);
@@ -2020,7 +2056,7 @@ async function loadFinance(){
   document.getElementById('financeNet').textContent='₹'+totals.net.toFixed(0);
 }
 function financeCSVText(v){
-  const q=x=>'"'+String(x??'').replace(/"/g,'""')+'"';
+  const q=csvCell;
   const {rows,range,totals,monthly}=v;
   let csv='SPENDING & INCOME REPORT\n';
   csv+=`Period,${q(range.label)}\nFrom,${q(range.from?finFmt(range.from):'All')}\nTo,${q(range.to?finFmt(range.to):'All')}\nGenerated,${q(new Date().toLocaleString())}\n\n`;
@@ -2085,7 +2121,7 @@ function tenantAdvanceInfo(tf){
   const paid=history.filter(l=>!String(l.type||'').toLowerCase().includes('debit')).reduce((s,l)=>s+(Number(l.amount)||0),0);
   return {current,paid,history};
 }
-function tenantReportCsv(rows,mode){let csv='';if(mode==='persons'){csv='File Number,Available Persons,Person Names\n';rows.forEach(r=>csv+=`"${r.billNo}",${r.count},"${String((r.names||[]).join(', ')).replace(/"/g,'""')}"\n`);}else if(mode==='advances'){csv='File Number,Paid Advance,Current Advance,Advance History\n';rows.forEach(r=>csv+=`"${r.billNo}",${Number(r.paid||0)},${Number(r.amount||0)},"${String((r.history||[]).map(x=>`${x.date||''} ${x.type||''} ₹${Number(x.amount||0)}`).join(' | ')).replace(/"/g,'""')}"\n`);}else{csv='File Number,Person Names\n';rows.forEach(r=>csv+=`"${r.billNo}","${String((r.names||[]).join(', ')).replace(/"/g,'""')}"\n`);}const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u,a.download='tenant-'+mode+'-'+Date.now()+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);}
+function tenantReportCsv(rows,mode){let csv='';if(mode==='persons'){csv='File Number,Available Persons,Person Names\n';rows.forEach(r=>csv+=[r.billNo,r.count,(r.names||[]).join(', ')].map(csvCell).join(',')+'\n');}else if(mode==='advances'){csv='File Number,Paid Advance,Current Advance,Advance History\n';rows.forEach(r=>csv+=[r.billNo,Number(r.paid||0),Number(r.amount||0),(r.history||[]).map(x=>`${x.date||''} ${x.type||''} \u20b9${Number(x.amount||0)}`).join(' | ')].map(csvCell).join(',')+'\n');}else{csv='File Number,Person Names\n';rows.forEach(r=>csv+=[r.billNo,(r.names||[]).join(', ')].map(csvCell).join(',')+'\n');}const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u,a.download='tenant-'+mode+'-'+Date.now()+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);}
 function showTenantReportDetail(index){
   const r=tenantReportRows[index],c=document.getElementById('tenantRptDetail');if(!r||!c)return;
   if(tenantReportMode==='persons'||tenantReportMode==='names')c.innerHTML=`<div class="card" style="margin-top:6px;padding:7px 9px;max-width:420px;font-size:12px;cursor:pointer" onclick="this.remove()"><div style="display:flex;justify-content:space-between;align-items:center"><b>${esc(r.billNo)}</b><span style="font-size:12px;color:#94a3b8">Tap to close</span></div><div style="margin-top:4px;line-height:1.45">${(r.names||[]).map((n,i)=>`<div style="padding:2px 0;border-bottom:1px solid rgba(255,255,255,.05)">${i+1}. ${n}</div>`).join('')||'No person names available'}</div></div>`;
@@ -2206,7 +2242,7 @@ window.showTenantReportDetail=showTenantReportDetail;
 
 
 
-function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('open');}function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}document.getElementById('ham').onclick=openDrawer;document.getElementById('overlay').onclick=closeDrawer;document.getElementById('prepMonth').value=selectedMonth;document.getElementById('prepMonth').addEventListener('change',e=>{selectedMonth=e.target.value;loadPreparing();loadAddition();});document.getElementById('prepPrice').addEventListener('input',e=>{pricePerUnit=parseFloat(e.target.value)||8.5;});document.getElementById('prepZone').onclick=()=>document.getElementById('prepFile').click();document.getElementById('prepFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f) return;document.getElementById('prepFileName').textContent=f.name;const r=new FileReader();r.onload=async ev=>{await ensureBillStoresFromTenantFiles();const tenantSet=tenantBillSet(await getConfiguredTenantFiles());const csv=parsePreparingCSV(ev.target.result);const endWarns=await resolveEndOnly(csv,tenantSet);const arr=csv.filter(p=>tenantSet.has(norm(p.billNo)));const skipped=csv.length-arr.length;if(!(await v72ImportPreview(csv,arr,endWarns))){toast('Import cancelled - nothing saved');e.target.value='';return;}if(arr.length){const keys=new Set(arr.map(p=>norm(p.billNo)));for(const r of (await getAll('persons')).filter(x=>x.month===selectedMonth&&keys.has(norm(x.billNo))))await del('persons',r.id);for(const r of (await getAll('modlog')).filter(x=>x.month===selectedMonth&&keys.has(norm(x.billNo))))await del('modlog',r.id);}const existing=await getAll('preparing');const map=new Map(existing.filter(b=>b.month===selectedMonth).map(b=>[norm(b.billNo),b]));for(const p of arr){const old=map.get(norm(p.billNo));const row=old?{...old,...p,id:old.id}:p;await put('preparing',row);}await syncPreparingPrices();preparing=await getAll('preparing');renderPreparing();if(!arr.length&&!csv.length&&(csv.warnings||[]).length){alert('No readings were imported:\n\n'+csv.warnings.slice(0,20).join('\n'));return;}if(!arr.length){alert('No bill in this CSV matches the tenant files on THIS phone ('+csv.length+' rows ignored).\n\nData is stored separately on each phone. On this phone first create the groups in Rent Update (bill count) or restore your Backup JSON + Backup ZIP from the other phone, then upload the readings again.');return;}toast(`${arr.length} matched bills updated${skipped?` • ${skipped} unmatched ignored`:''} - Auto syncing to Bill Addition...`);await syncAdditionFromPreparing();await loadAddition();await loadManage();toast(`${arr.length} matched bills updated in Preparing & Addition ✓`);{const allW=[...(csv.warnings||[]),...endWarns];if(allW.length)alert('Check these rows:\n\n'+allW.slice(0,20).join('\n')+(allW.length>20?'\n...and '+(allW.length-20)+' more':''));}};r.readAsText(f);});document.getElementById('prepSave').onclick=async()=>{const mb=preparing.filter(b=>b.month===selectedMonth);if(mb.length===0){toast('No bills');return;}for(const b of mb) await put('preparing',b);toast(`Saved ${mb.length} ✓`);await syncAdditionFromPreparing();};document.getElementById('prepClear').onclick=async()=>{const mb=preparing.filter(b=>b.month===selectedMonth);for(const b of mb) await del('preparing',b.id);preparing=preparing.filter(b=>b.month!==selectedMonth);renderPreparing();toast('Cleared');};document.getElementById('syncBtn').onclick=syncAdditionFromPreparing;document.getElementById('recalcBtn').onclick=async()=>{await loadAddition();toast('Recalculated');};document.getElementById('addZone').onclick=()=>document.getElementById('addFile').click();document.getElementById('addFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f) return;document.getElementById('addFileName').textContent=f.name;const r=new FileReader();r.onload=ev=>{const rows=parsePersonsCSV(ev.target.result);mergePersons(rows);};r.readAsText(f);});document.getElementById('groupAddBtn').onclick=async()=>{const val=document.getElementById('groupInput').value.trim();if(!val){toast('Enter groups');return;}const names=val.split(',').map(s=>cleanBill(s)).filter(Boolean);for(const name of names){if(groups.find(g=>norm(g.name)===norm(name))) continue;await put('groups',{id:genId(),name,billCount:1,rent:3000,limitedPerson:3,extraPersonRent:500,limitAdvance:5000,extraPersonAdvance:1000,extraCharge:0,pricePerUnit:8.5});}document.getElementById('groupInput').value='';await loadGroups();await loadAddition();toast(`Groups added`);};document.getElementById('addPersonUpdateBtn').onclick=async()=>{const billNo=document.getElementById('addPersonBill').value.trim();const count=Math.max(0,parseInt(document.getElementById('addPersonCount').value)||0);if(!billNo){toast('Enter Bill No');return;}let row=addition.find(b=>norm(b.billNo)===norm(billNo)&&b.month===selectedMonth);if(!row){toast('Bill not found in Bill Addition');return;}row.personsStayed=count;await put('addition',row);await loadAddition();const fresh=(await getAll('addition')).find(b=>norm(b.billNo)===norm(billNo)&&b.month===selectedMonth);if(fresh){addition=await getAll('addition');}document.getElementById('addPersonUpdateBtn').blur();toast(`${billNo}: ${count} persons updated • Final Amount recalculated ✓`);};
+function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('open');}function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}document.getElementById('ham').onclick=openDrawer;document.getElementById('overlay').onclick=closeDrawer;document.getElementById('prepMonth').value=selectedMonth;document.getElementById('prepMonth').addEventListener('change',e=>{selectedMonth=e.target.value;loadPreparing();loadAddition();});document.getElementById('prepPrice').addEventListener('input',e=>{pricePerUnit=parseFloat(e.target.value)||8.5;});document.getElementById('prepZone').onclick=()=>document.getElementById('prepFile').click();document.getElementById('prepFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f) return;document.getElementById('prepFileName').textContent=f.name;const r=new FileReader();r.onload=async ev=>{await ensureBillStoresFromTenantFiles();const tenantSet=tenantBillSet(await getConfiguredTenantFiles());const csv=parsePreparingCSV(ev.target.result);const endWarns=await resolveEndOnly(csv,tenantSet);const arr=csv.filter(p=>tenantSet.has(norm(p.billNo)));const skipped=csv.length-arr.length;if(!(await v72ImportPreview(csv,arr,endWarns))){toast('Import cancelled - nothing saved');e.target.value='';return;}if(arr.length){const keys=new Set(arr.map(p=>norm(p.billNo)));for(const r of (await getAll('persons')).filter(x=>x.month===selectedMonth&&keys.has(norm(x.billNo))))await del('persons',r.id);for(const r of (await getAll('modlog')).filter(x=>x.month===selectedMonth&&keys.has(norm(x.billNo))))await del('modlog',r.id);}const existing=await getAll('preparing');const map=new Map(existing.filter(b=>b.month===selectedMonth).map(b=>[norm(b.billNo),b]));for(const p of arr){const old=map.get(norm(p.billNo));const row=old?{...old,...p,id:old.id}:p;await put('preparing',row);}await syncPreparingPrices();preparing=await getAll('preparing');renderPreparing();if(!arr.length&&!csv.length&&(csv.warnings||[]).length){alert('No readings were imported:\n\n'+csv.warnings.slice(0,20).join('\n'));return;}if(!arr.length){alert('No bill in this CSV matches the tenant files on THIS phone ('+csv.length+' rows ignored).\n\nData is stored separately on each phone. On this phone first create the groups in Rent Update (bill count) or restore your Backup JSON + Backup ZIP from the other phone, then upload the readings again.');return;}toast(`${arr.length} matched bills updated${skipped?` • ${skipped} unmatched ignored`:''} - Auto syncing to Bill Addition...`);await syncAdditionFromPreparing();await loadAddition();await loadManage();toast(`${arr.length} matched bills updated in Preparing & Addition ✓`);{const allW=[...(csv.warnings||[]),...endWarns];if(allW.length)alert('Check these rows:\n\n'+allW.slice(0,20).join('\n')+(allW.length>20?'\n...and '+(allW.length-20)+' more':''));}};r.readAsText(f);});document.getElementById('prepSave').onclick=async()=>{const mb=preparing.filter(b=>b.month===selectedMonth);if(mb.length===0){toast('No bills');return;}for(const b of mb) await put('preparing',b);toast(`Saved ${mb.length} ✓`);await syncAdditionFromPreparing();};document.getElementById('prepClear').onclick=async()=>{const mb=preparing.filter(b=>b.month===selectedMonth);for(const b of mb) await del('preparing',b.id);preparing=preparing.filter(b=>b.month!==selectedMonth);renderPreparing();toast('Cleared');};document.getElementById('syncBtn').onclick=syncAdditionFromPreparing;document.getElementById('recalcBtn').onclick=async()=>{await loadAddition();toast('Recalculated');};document.getElementById('addZone').onclick=()=>document.getElementById('addFile').click();document.getElementById('addFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f) return;document.getElementById('addFileName').textContent=f.name;const r=new FileReader();r.onload=ev=>{const rows=parsePersonsCSV(ev.target.result);mergePersons(rows);};r.onerror=()=>toast('❌ Could not read the file');r.readAsText(f);e.target.value='';});document.getElementById('groupAddBtn').onclick=async()=>{const val=document.getElementById('groupInput').value.trim();if(!val){toast('Enter groups');return;}const names=val.split(',').map(s=>cleanBill(s)).filter(Boolean);for(const name of names){if(groups.find(g=>norm(g.name)===norm(name))) continue;await put('groups',{id:genId(),name,billCount:1,rent:3000,limitedPerson:3,extraPersonRent:500,limitAdvance:5000,extraPersonAdvance:1000,extraCharge:0,pricePerUnit:8.5});}document.getElementById('groupInput').value='';await loadGroups();await loadAddition();toast(`Groups added`);};document.getElementById('addPersonUpdateBtn').onclick=async()=>{const billNo=document.getElementById('addPersonBill').value.trim();const count=Math.max(0,parseInt(document.getElementById('addPersonCount').value)||0);if(!billNo){toast('Enter Bill No');return;}let row=addition.find(b=>norm(b.billNo)===norm(billNo)&&b.month===selectedMonth);if(!row){toast('Bill not found in Bill Addition');return;}row.personsStayed=count;await put('addition',row);await loadAddition();const fresh=(await getAll('addition')).find(b=>norm(b.billNo)===norm(billNo)&&b.month===selectedMonth);if(fresh){addition=await getAll('addition');}document.getElementById('addPersonUpdateBtn').blur();toast(`${billNo}: ${count} persons updated • Final Amount recalculated ✓`);};
 document.getElementById('syncTenantPersonsBtn').onclick=async()=>{await syncTenantPersonsToAddition(true);};
 document.getElementById('personSearchBtn').onclick=async()=>{const billNo=document.getElementById('personSearch').value.trim();if(!billNo){toast('Enter bill no');return;}const add=addition.find(b=>norm(b.billNo)===norm(billNo)&&b.month===selectedMonth)||addition.find(b=>norm(b.billNo)===norm(billNo));if(!add){toast('Bill not found');return;}persons=await getAll('persons');document.getElementById('personDetail').innerHTML=await renderPersonDetailAsync(add);};(function(){
   const inp=document.getElementById('personSearch');
@@ -2230,7 +2266,7 @@ document.getElementById('personSearchBtn').onclick=async()=>{const billNo=docume
   document.getElementById('modRegisterExport').onclick=async()=>{
     const rows=await modHistoryRows(true,false);
     if(!rows.length){toast('No history to export');return;}
-    const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+    const q=csvCell;
     const head='Bill No,Date,Month,Adjust,Person,From,To,Limit Person Days,Extra Person Days,Limit Person Rent,Extra Person Rent,After Modify Amount';
     const csv='\ufeff'+[head].concat(rows.map(r=>{const c=modRowCells(r);return [r.billNo,String(r.date||'').slice(0,10),r.month,c.kindText,c.who,c.fromV,c.toV,c.limitDaysTxt,c.extraDaysTxt,c.limitRentTxt,c.extraRentTxt,c.afterTxt].map(q).join(',');})).join('\r\n')+'\r\n';
     const u=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download='Person-Modify-History-'+todayLocal()+'.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);
@@ -2600,7 +2636,7 @@ function renderTenantFolders(){
       document.querySelectorAll('#tenantFolders .folder').forEach(x=>x.classList.remove('active'));
       f.classList.add('active');
       renderTenantFilesList(g.name);
-      document.getElementById('tenantFolderLabel').textContent=`${g.name} - ${tenantFiles.filter(tf=>tf.group===g.name).length} files`;
+      {const _fl=document.getElementById('tenantFolderLabel');if(_fl)_fl.textContent=`${g.name} - ${tenantFiles.filter(tf=>tf.group===g.name).length} files`;}
     };
     c.appendChild(f);
   });
@@ -2681,7 +2717,7 @@ window.openCreateFileModal=(groupPref)=>{
     <div style="display:flex;justify-content:space-between"><h3>Create Tenant File</h3><button onclick="closeTenantCreateModal()" class="btn btn-secondary">✕</button></div>
     <div style="margin-top:10px">
       <div class="label">Group</div>
-      <select id="createFileGroup" class="input">${esc(tenantGroups.map(g=>`<option value="${g.name}" ${g.name===groupPref?'selected':''}>${g.name}</option>`).join(''))}</select>
+      <select id="createFileGroup" class="input">${tenantGroups.map(g=>`<option value="${esc(g.name)}" ${g.name===groupPref?'selected':''}>${esc(g.name)}</option>`).join('')}</select>
       <div class="label" style="margin-top:8px">Roll Number (e.g., 2 for N2)</div>
       <input type="number" id="createFileRoll" class="input" placeholder="2">
       <div class="label" style="margin-top:8px">Initial Advance ₹</div>
@@ -3038,7 +3074,7 @@ window.exportTenantHTML=async(id)=>{
 window.exportTenantCSV=async(id)=>{
   const tf=tenantFiles.find(t=>t.id===id);
   let csv='FileName,Group,Roll,Advance,AdvanceDate,PersonName,Age,Company,Mobile,IDType,IDNumber,Entry,Exit\n';
-  tf.persons.forEach(p=>{csv+=`${tf.fileName},${tf.group},${tf.roll},${tf.advance},${tf.advanceDate},"${p.name}",${p.age},${p.company},${p.mobile},${p.idType},${p.idNumber},${p.entryDate},${p.exitDate||''}\n`;});
+  tf.persons.forEach(p=>{csv+=[tf.fileName,tf.group,tf.roll,tf.advance,tf.advanceDate,p.name,p.age,p.company,p.mobile,p.idType,p.idNumber,p.entryDate,p.exitDate||''].map(csvCell).join(',')+'\n';});
   const blob=new Blob([csv],{type:'text/csv'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a'); a.href=url; a.download=tf.fileName+'.csv'; a.click();
@@ -3370,7 +3406,7 @@ window.viewTenantAdvanceHistory=(id)=>{
 
 
 window.downloadAllXLSX=async()=>{
-  if(typeof XLSX==='undefined'){toast('Excel library not loaded');return;}
+  if(typeof XLSX==='undefined'){toast('Excel library not loaded - internet is needed for Excel export (CSV exports work offline)');return;}
   const wb=XLSX.utils.book_new();
   const month=selectedMonth;
   const esc=v=>v===undefined||v===null?'':v;
@@ -3447,15 +3483,15 @@ window.downloadCSV=(type)=>{
   let csv='', filename='';
   if(type==='preparing'){
     csv='BillNo,Start,End,Units,Charge,Price\n';
-    preparing.filter(b=>b.month===selectedMonth).forEach(b=>{csv+=`${b.billNo},${b.from},${b.to},${b.units},${b.charge},${b.price}\n`;});
+    preparing.filter(b=>b.month===selectedMonth).forEach(b=>{csv+=[b.billNo,b.from,b.to,b.units,b.charge,b.price].map(csvCell).join(',')+'\n';});
     filename='preparing-'+selectedMonth+'.csv';
   } else if(type==='addition'){
     csv='BillNo,Group,Units,UnitsCharge,AvailablePerson,PrevBalance,RentLimit,RentExtra,TotalAmount\n';
-    addition.filter(b=>b.month===selectedMonth).forEach(b=>{csv+=`${b.billNo},${b.group},${b.units},${b.unitsCharge},${b.personsStayed},${b.prevBalance},${b.limitRent},${b.extraTotal},${b.billAmount}\n`;});
+    addition.filter(b=>b.month===selectedMonth).forEach(b=>{csv+=[b.billNo,b.group,b.units,b.unitsCharge,b.personsStayed,b.prevBalance,b.limitRent,b.extraTotal,b.billAmount].map(csvCell).join(',')+'\n';});
     filename='addition-'+selectedMonth+'.csv';
   } else if(type==='groups'){
     csv='Group,Rent,LimitPerson,ExtraRent,LimitAdvance,ExtraPersonAdvance,ExtraCharge,PricePerUnit\n';
-    groups.forEach(g=>{csv+=`${g.name},${g.rent},${g.limitedPerson},${g.extraPersonRent},${g.limitAdvance||0},${g.extraPersonAdvance||0},${g.extraCharge||0},${g.pricePerUnit}\n`;});
+    groups.forEach(g=>{csv+=[g.name,g.rent,g.limitedPerson,g.extraPersonRent,g.limitAdvance||0,g.extraPersonAdvance||0,g.extraCharge||0,g.pricePerUnit].map(csvCell).join(',')+'\n';});
     filename='groups.csv';
   }
   const blob=new Blob([csv],{type:'text/csv'});
@@ -3641,7 +3677,7 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
   const $=id=>document.getElementById(id);
   const n=v=>String(v??'').trim().toUpperCase();
   const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  const csv=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const csv=csvCell;
   const toastNT=m=>{try{toast(m)}catch{alert(m)}};
   const today=()=>todayLocal();
   const now=()=>new Date().toISOString();
@@ -3768,7 +3804,7 @@ window.restoreTenantBackup=async function(input){const file=input?.files?.[0];if
   window.ntStatusCsv=()=>{
     const st=NT.status;if(!st)return;
     const rows=statusRows();
-    const q=x=>'"'+String(x??'').replace(/"/g,'""')+'"';
+    const q=csvCell;
     const ok=v=>v?'OK':'PENDING';
     let csv='';
     if(st==='unavailable'){
@@ -5071,7 +5107,7 @@ if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
    const mg=(await getAll('manage')).find(x=>norm(x.billNo)===bn&&x.month===mo);const du=(await getAll('dual')).filter(x=>norm(x.billNo)===bn);
    ok('payment: received 40',!!mg&&Number(mg.received)===40);ok('payment: history row saved',du.length>=1);ok('payment: balance 60',!!mg&&Math.max(0,100-Number(mg.received))===60);}
   catch(e){ok('payment ('+e.message+')',false);}
-  finally{for(const st of['addition','manage','dual','modlog']){try{for(const r of await getAll(st,true))if(norm(r.billNo)===bn)await del(st,r.id);}catch(e){}}}}catch(e){}
+  finally{for(const st of['addition','manage','dual','modlog']){try{for(const r of await getAll(st,true))if(norm(r.billNo)===bn)await del(st,r.id);}catch(e){console.warn(e)}}}}catch(e){console.warn(e)}
   try{const id='__selftest_'+Date.now();await put('modlog',{id,type:'selftest'});const r=(await getAll('modlog')).some(x=>x.id===id);await del('modlog',id);ok('db put/get/del',r&&!(await getAll('modlog')).some(x=>x.id===id));}catch(e){ok('db put/get/del ('+e.message+')',false);}
   dlg('<b>Self-test</b><pre>'+esc(t.join('\n'))+'</pre><button style="background:#14b8a6" onclick="document.getElementById(\'v72Dlg\').__done(1)">Close</button>');
  };
@@ -5399,7 +5435,7 @@ window.v72ImportTenantJson=async function(input){
 <script id="v72media">(function(){const o=FileReader.prototype.readAsDataURL;
  async function shrink(b){const bm=await createImageBitmap(b);const M=1280,k=Math.min(1,M/Math.max(bm.width,bm.height));const c=document.createElement('canvas');c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);c.getContext('2d').drawImage(bm,0,0,c.width,c.height);return await new Promise(r=>c.toBlob(x=>r(x&&x.size<b.size?x:b),'image/jpeg',0.72));}
  FileReader.prototype.readAsDataURL=function(b){const me=this;
-  if(b&&b.size>8*1024*1024){try{toast('Large file (over 8 MB). It may slow the app.');}catch(e){}}
+  if(b&&b.size>8*1024*1024){try{toast('Large file (over 8 MB). It may slow the app.');}catch(e){console.warn(e)}}
   if(b&&/^image\/(jpeg|png|webp)/.test(b.type)&&b.size>250000&&window.createImageBitmap){shrink(b).then(x=>o.call(me,x),()=>o.call(me,b));}else o.call(me,b);};})();</script>
 <script>try{updateTfmLinkUI();}catch(e){console.warn(e)}</script>
 </body></html>
